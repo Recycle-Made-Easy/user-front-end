@@ -85,7 +85,7 @@ body {
   justify-content: center;
 }
 
-.h1 {
+.header__title {
   color: var(--oscar-the-grouch);
   margin: 1rem;
   padding: 1rem;
