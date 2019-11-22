@@ -1,4 +1,4 @@
-// const Map = require("./map");
+const Map = require("./map");
 
 const wrapper = document.querySelector(".wrapper");
 
@@ -56,12 +56,18 @@ zipCodeForm.append(zipCodeName);
 
 const inputType = document.createElement("input");
 inputType.classList.add("input");
+inputType.classList.add("location-form__input");
 zipCodeForm.append(inputType);
 
 const submitButton = document.createElement("button");
 submitButton.innerHTML = "Submit";
 submitButton.classList.add("submit");
+submitButton.classList.add("location-form__button");
 zipCodeForm.append(submitButton);
+
+submitButton.onclick = (event) => {
+    Map.searchByZipCode();
+}
 
 const googleMap = document.createElement("div");
 googleMap.classList.add("google-map");
