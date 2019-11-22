@@ -1,6 +1,5 @@
+// const Map = require("./map");
 
-
-// const elements = require("./elements");
 const wrapper = document.querySelector(".wrapper");
 
 const createdHeaderContainer = document.createElement("header");
@@ -63,6 +62,18 @@ const submitButton = document.createElement("button");
 submitButton.innerHTML = "Submit";
 submitButton.classList.add("submit");
 zipCodeForm.append(submitButton);
+
+const googleMap = document.createElement("div");
+googleMap.classList.add("google-map");
+document.querySelector(".flex-wrapper-outer").append(googleMap);
+
+const iframe = document.createElement("iframe");
+iframe.classList.add("google-map__iframe");
+iframe.src = "https://www.google.com/maps/embed/v1/view?zoom=10&center=39.9612%2C-82.9988&key=AIzaSyAZpUBB7ZJkWZnjMIK7bscJVc_6km5D6O4"
+// googleMap.innerHTML = <iframe width="600" height="450" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/view?zoom=10&center=39.9612%2C-82.9988&key=AIzaSyAZpUBB7ZJkWZnjMIK7bscJVc_6km5D6O4" allowfullscreen></iframe>
+iframe.allowfullscreen = true;
+googleMap.append(iframe);
+// Map.displayMap();
 
 
 
