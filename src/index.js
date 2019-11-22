@@ -63,6 +63,25 @@ submitButton.innerHTML = "Submit";
 submitButton.classList.add("submit");
 zipCodeForm.append(submitButton);
 
+var myParent = document.body;
+
+var array = ["Dublin","Westerville","Clintonville","Hilliard"];
+
+var selectList = document.createElement("select");
+selectList.id = "mySelect";
+myParent.appendChild(selectList);
+
+for (var i = 0; i < array.length; i++) {
+    var option = document.createElement("option");
+    option.value = array[i];
+    option.text = array[i];
+    selectList.appendChild(option);
+    byTown.append(selectList);
+}
+
+
+
+
 const googleMap = document.createElement("div");
 googleMap.classList.add("google-map");
 document.querySelector(".flex-wrapper-outer").append(googleMap);
