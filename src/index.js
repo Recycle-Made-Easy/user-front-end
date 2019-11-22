@@ -64,22 +64,34 @@ submitButton.innerHTML = "Submit";
 submitButton.classList.add("submit");
 submitButton.classList.add("location-form__button");
 zipCodeForm.append(submitButton);
-
 submitButton.onclick = (event) => {
     Map.searchByZipCode();
 }
 
+
+var myParent = document.body;
+
+var array = ["Dublin","Westerville","Clintonville","Hilliard"];
+
+var selectList = document.createElement("select");
+selectList.id = "mySelect";
+myParent.appendChild(selectList);
+
+for (var i = 0; i < array.length; i++) {
+    var option = document.createElement("option");
+    option.value = array[i];
+    option.text = array[i];
+    selectList.appendChild(option);
+    byTown.append(selectList);
+}
+
+
+
 const googleMap = document.createElement("div");
 googleMap.classList.add("google-map");
 document.querySelector(".flex-wrapper-outer").append(googleMap);
-
-const iframe = document.createElement("iframe");
-iframe.classList.add("google-map__iframe");
-iframe.src = "https://www.google.com/maps/embed/v1/view?zoom=10&center=39.9612%2C-82.9988&key=AIzaSyAZpUBB7ZJkWZnjMIK7bscJVc_6km5D6O4"
-// googleMap.innerHTML = <iframe width="600" height="450" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/view?zoom=10&center=39.9612%2C-82.9988&key=AIzaSyAZpUBB7ZJkWZnjMIK7bscJVc_6km5D6O4" allowfullscreen></iframe>
-iframe.allowfullscreen = true;
+googleMap.innerHTML = "<iframe width='600' height='450' frameborder='0' style='border:0' src='https://www.google.com/maps/embed/v1/view?zoom=10&center=39.9612%2C-82.9988&key=AIzaSyAZpUBB7ZJkWZnjMIK7bscJVc_6km5D6O4' allowfullscreen></iframe>";
 googleMap.append(iframe);
-// Map.displayMap();
 
 
 
