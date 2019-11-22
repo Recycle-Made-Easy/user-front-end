@@ -94,9 +94,5 @@ selectList.addEventListener('change', (event) => {
 const googleMap = document.createElement("div");
 googleMap.classList.add("google-map");
 document.querySelector(".flex-wrapper-outer").append(googleMap);
-googleMap.innerHTML = "<iframe width='600' height='450' frameborder='0' style='border:0' src='https://www.google.com/maps/embed/v1/view?zoom=10&center=39.9612%2C-82.9988&key=AIzaSyAZpUBB7ZJkWZnjMIK7bscJVc_6km5D6O4' allowfullscreen></iframe>";
-googleMap.append(iframe);
-
-
-
+Map.displayMap();
 
