@@ -85,6 +85,10 @@ for (var i = 0; i < array.length; i++) {
     byTown.append(selectList);
 }
 
+selectList.addEventListener('change', (event) => {
+    console.log("selected");
+    Map.searchByTown();
+  });
 
 
 const googleMap = document.createElement("div");

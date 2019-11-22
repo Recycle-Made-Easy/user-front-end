@@ -14,6 +14,28 @@ module.exports = {
     googleMap.append(frame);
   },
 
+  searchByTown() {
+    event.preventDefault();
+
+    let townCodeMap = new Map();
+    townCodeMap.set("Westerville", "ChIJVyNMY2X1OIgRQT9dsFQwoUY");
+    townCodeMap.set("Dublin", "ChIJH6FQ1MTsOIgRKJBoFWgXwgA");
+    townCodeMap.set("Clintonville", "ChIJn3LhCWiMOIgR3Rx6W6VV1PA");
+    townCodeMap.set("Hilliard", "ChIJMxtWksaWOIgRnlXah9jo_aE");
+
+    const townCodeInput = document.querySelector("#mySelect");
+    const townCode = townCodeInput.value;   
+    const placeId = townCodeMap.get(townCode);
+    console.log("Town code entered, " + townCode + ", has a place id of " + placeId + ".");
+
+    const GOOGLE_API_KEY = "AIzaSyAZpUBB7ZJkWZnjMIK7bscJVc_6km5D6O4"
+
+    const googleMap = document.querySelector(".google-map");
+    googleMap.innerHTML = "<iframe width='600' height='450' frameborder='0' style='border:0' src='https://www.google.com/maps/embed/v1/place?q=place_id:" + placeId + "&key=" + GOOGLE_API_KEY + "' allowfullscreen></iframe>";
+  },
+
+
+
   searchByZipCode() {
     event.preventDefault();
 
@@ -44,34 +66,7 @@ module.exports = {
     googleMap.innerHTML = "<iframe width='600' height='450' frameborder='0' style='border:0' src='https://www.google.com/maps/embed/v1/place?q=place_id:" + placeId + "&key=" + GOOGLE_API_KEY + "' allowfullscreen></iframe>";
 
 
-    // addAlbumButton.onclick = (event) => {
-    //   event.preventDefault();
-    //   const albumTitle = document.querySelector(".form-album__input").value;
-    //   const artistId = document.querySelector(".form-album__select").value;
-    //   console.log("Album Title: " + albumTitle);
-    //   console.log("Artist Id: " + artistId);
-
-    //   fetch('http://localhost:8080/albums/add-album/' + artistId + "/" + albumTitle, {
-    //     method: "POST",
-    //     headers: {
-    //       "Content-Type": "application/json"
-    //     },
-    //     body: JSON.stringify({
-    //       artistId: artistId,
-    //       title: albumTitle
-    //     })
-    //   })
-    //     .then(response => {
-    //       return response.json();
-    //     })
-    //     .then(data => {
-    //       console.log(data);
-    //     })
-    //     .then(data => {
-    //       this.renderAlbums();
-    //     });
-
-    // }
+    
   }
 
 }
