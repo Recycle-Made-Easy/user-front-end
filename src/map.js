@@ -17,16 +17,9 @@ module.exports = {
   searchByTown() {
     event.preventDefault();
 
-    let townCodeMap = new Map();
-    townCodeMap.set("Westerville", "ChIJVyNMY2X1OIgRQT9dsFQwoUY");
-    townCodeMap.set("Dublin", "ChIJH6FQ1MTsOIgRKJBoFWgXwgA");
-    townCodeMap.set("Clintonville", "ChIJn3LhCWiMOIgR3Rx6W6VV1PA");
-    townCodeMap.set("Hilliard", "ChIJMxtWksaWOIgRnlXah9jo_aE");
-    townCodeMap.set("Columbus", "ChIJcd6QucGJOIgRM7Wxz_hmMuQ");
-
-    const townCodeInput = document.querySelector("#selectList");
-    const townCode = townCodeInput.value;
-    const placeId = townCodeMap.get(townCode);
+    // Finds which local area name is currently selected in the dropdown.
+    const localArea = document.querySelector("#selectList").value;
+    const placeId = Config.LocalAreas().get(localArea);  
 
     // The empty selection in the dropdown will default the map to how it looks when the page first loads.
     if (!placeId == "") {
