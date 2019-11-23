@@ -24,12 +24,17 @@ module.exports = {
     townCodeMap.set("Hilliard", "ChIJMxtWksaWOIgRnlXah9jo_aE");
     townCodeMap.set("Columbus", "ChIJcd6QucGJOIgRM7Wxz_hmMuQ");
 
-    const townCodeInput = document.querySelector("#mySelect");
+    const townCodeInput = document.querySelector("#selectList");
     const townCode = townCodeInput.value;
     const placeId = townCodeMap.get(townCode);
 
-    this.displayMapByPlaceId(placeId);
-
+    // The empty selection in the dropdown will default the map to how it looks when the page first loads.
+    if (!placeId == "") {
+      this.displayMapByPlaceId(placeId);
+    } else {
+      this.displayMap();
+    }
+    
   },
 
 

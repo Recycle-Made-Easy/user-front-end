@@ -1,4 +1,5 @@
 const Map = require("./map");
+const Config = require("./config");
 
 const wrapper = document.querySelector(".wrapper");
 
@@ -69,28 +70,33 @@ submitButton.onclick = (event) => {
 }
 
 
-var myParent = document.body;
-
-var array = ["Dublin","Westerville","Clintonville","Hilliard"];
-
-var selectList = document.createElement("select");
-selectList.id = "mySelect";
+const myParent = document.body;
+const selectList = document.createElement("select");
+selectList.id = "selectList";
 myParent.appendChild(selectList);
 
-for (var i = 0; i < array.length; i++) {
-    var option = document.createElement("option");
-    option.value = array[i];
-    option.text = array[i];
+// Displays first option in the dropdown as empty.
+const option = document.createElement("option");
+option.value = "";
+option.text = "";
+selectList.appendChild(option);
+byTown.append(selectList);
+
+// Populate dropdown with local area names.
+Config.LocalAreas().forEach((placeId, name) => {
+    const option = document.createElement("option");
+    option.value = name;
+    option.text = name;
     selectList.appendChild(option);
     byTown.append(selectList);
-}
+})
 
+// Update Google Map when different local area is selected.
 selectList.addEventListener('change', (event) => {
-    console.log("selected");
     Map.searchByTown();
-  });
+});
 
-
+// Adds Google Map to the page.
 const googleMap = document.createElement("div");
 googleMap.classList.add("google-map");
 document.querySelector(".flex-wrapper-outer").append(googleMap);
