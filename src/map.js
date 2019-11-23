@@ -30,25 +30,11 @@ module.exports = {
     
   },
 
-
-
   searchByZipCode() {
     event.preventDefault();
-
-    let zipCodeMap = new Map();
-    zipCodeMap.set("43201", "ChIJ9Rz24rWOOIgR3EEuL2Ge4oo");
-    zipCodeMap.set("43206", "ChIJw6wuB5iIOIgRus0jBTvKLHo");
-    zipCodeMap.set("43212", "ChIJOW2nsVCOOIgR0IzLWzB30l4");
-    zipCodeMap.set("43215", "ChIJmRPPvRCGOIgRARpJZtkXzq0");
-    zipCodeMap.set("43224", "ChIJj3ATYruLOIgRMmVSsRFsuQ0");
-
-    const zipCodeInput = document.querySelector(".location-form__input");
-    const zipCode = zipCodeInput.value;
-    const placeId = zipCodeMap.get(zipCode);
-    console.log("Zip code entered, " + zipCode + ", has a place id of " + placeId + ".");
-
+    const zipCode = document.querySelector(".location-form__input").value;
+    const placeId = Config.ZipCodes().get(zipCode);
     this.displayMapByPlaceId(placeId);
-
   }
 
 }
