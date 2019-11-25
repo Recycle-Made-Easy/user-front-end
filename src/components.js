@@ -102,6 +102,26 @@ module.exports = {
         });
     },
 
+    categories() {
+
+        const categoryContainer = document.createElement("section");
+        categoryContainer.classList.add("recycling-category-container");
+        document.querySelector(".flex-wrapper-outer").append(categoryContainer);
+
+        fetch("http://localhost:8080/api/categories/")
+            .then(res => res.json())
+            .then(function (data) {
+                console.log(data);
+                for (let index = 0; index < data.length; index++) {
+                    console.log(data.name);
+                    const label = document.createElement("label")
+                    label.innerHTML = data.name;
+                    categoryContainer.append(label);
+                }
+            })
+
+    },
+
     googleMap() {
         // Adds Google Map to the page.
         const googleMap = document.createElement("div");
