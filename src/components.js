@@ -133,6 +133,25 @@ module.exports = {
 
     },
 
+    addresses () {
+        const addressContainer = document.createElement("section");
+        addressContainer.classList.add("addresses-container");
+        document.querySelector(".flex-wrapper-left").append(addressContainer);
+
+        fetch("http://localhost:8080/api/recycle-locations")
+            .then(res => res.json())
+            .then(function (data) {
+                console.log(data);
+                for (let index = 0; index < data.length; index++) {
+                    const div = document.createElement("div")
+                    // div.textContent = data[index].name;
+                    div.classList.add(".address-location");
+                    div.innerHTML = data[index].name;
+                    addressContainer.append(div);
+                }
+                })
+    },
+
     googleMap() {
         // Adds Google Map to the page.
         const googleMap = document.createElement("div");
