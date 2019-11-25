@@ -106,17 +106,28 @@ module.exports = {
 
         const categoryContainer = document.createElement("section");
         categoryContainer.classList.add("recycling-category-container");
-        document.querySelector(".flex-wrapper-outer").append(categoryContainer);
+        document.querySelector(".flex-wrapper-left").append(categoryContainer);
 
         fetch("http://localhost:8080/api/categories/")
             .then(res => res.json())
             .then(function (data) {
                 console.log(data);
                 for (let index = 0; index < data.length; index++) {
-                    console.log(data.name);
-                    const label = document.createElement("label")
-                    label.innerHTML = data.name;
+                    const div = document.createElement("div")
+                    // div.textContent = data[index].name;
+                    div.classList.add(".category-checkbox");                    
+
+                    const checkbox = document.createElement("input");
+                    checkbox.type = "checkbox";
+                    checkbox.value = data[index].id;
+                    checkbox.id = data[index].name + "-checkbox";
+                    checkbox.name = data[index].name;
+                    const label = document.createElement("label");
+                    label.htmlFor = data[index].name + "-checkbox";
+                    label.appendChild(document.createTextNode(data[index].name));
+                    categoryContainer.append(checkbox);
                     categoryContainer.append(label);
+                    categoryContainer.append(div);
                 }
             })
 
