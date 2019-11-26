@@ -22,6 +22,14 @@ module.exports = {
         zipCodeMap.set("43215", "ChIJmRPPvRCGOIgRARpJZtkXzq0");
         zipCodeMap.set("43224", "ChIJj3ATYruLOIgRMmVSsRFsuQ0");
         return zipCodeMap;
+    },
+    
+    RecycleCenters() {
+        let RecycleCentersMap = new Map();
+        RecycleCentersMap.set("Mark Gray Enterprises", "ChIJX6FjmMaPOIgRB40RjiCNx6E");
+        RecycleCentersMap.set("Hugo Neu Recycling", "ChIJX6FjmMaPOIgRB40RjiCNx6E");
+        return RecycleCentersMap;
+
     }
 
 }

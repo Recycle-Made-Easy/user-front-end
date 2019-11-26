@@ -35,6 +35,13 @@ module.exports = {
     const zipCode = document.querySelector(".location-form__input").value;
     const placeId = Config.ZipCodes().get(zipCode);
     this.displayMapByPlaceId(placeId);
+  },
+
+  clickedRecyclingCenter(name) {
+    // event.preventDefault();
+    // const recyclingCenterCode = document.querySelector(".address-link").value;
+    const placeId = Config.RecycleCenters().get(name);
+    this.displayMapByPlaceId(placeId);
   }
 
 }

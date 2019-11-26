@@ -136,7 +136,9 @@ module.exports = {
     addresses () {
         const addressContainer = document.createElement("section");
         addressContainer.classList.add("addresses-container");
+        addressContainer.innerHTML = "Recycle Locations:";
         document.querySelector(".flex-wrapper-left").append(addressContainer);
+
 
         fetch("http://localhost:8080/api/recycle-locations")
             .then(res => res.json())
@@ -145,9 +147,16 @@ module.exports = {
                 for (let index = 0; index < data.length; index++) {
                     const div = document.createElement("div")
                     // div.textContent = data[index].name;
-                    div.classList.add(".address-location");
-                    div.innerHTML = data[index].name;
+                    div.classList.add("address-location");
+                    const link = document.createElement('a')
+                    link.classList.add("address-link")
+                    // link.value = data[index].name;
+                    link.innerHTML = data[index].name;
+                    link.href = Map.clickedRecyclingCenter(data[index].name)
+                    div.append(link);
                     addressContainer.append(div);
+                    
+                    
                 }
                 })
     },

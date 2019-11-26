@@ -9,7 +9,9 @@ body {
   background-image: linear-gradient(white, var(--some-sky-blue));
   font-family: "Alata", sans-serif;
 }
-
+.address-location {
+  border: 2px solid black;
+}
 .by-town {
   align-items: flex-start;
   display: flex;
