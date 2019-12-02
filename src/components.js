@@ -152,6 +152,7 @@ module.exports = {
                     link.classList.add("address-link")
                     // link.value = data[index].name;
                     link.innerHTML = data[index].name;
+                                    // This lengthy method is in the map.js
                     link.href = Map.clickedRecyclingCenter(data[index].name)
                     div.append(link);
                     addressContainer.append(div);
