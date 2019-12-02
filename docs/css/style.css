@@ -9,9 +9,22 @@ body {
   background-image: linear-gradient(white, var(--some-sky-blue));
   font-family: "Alata", sans-serif;
 }
+
 .address-location {
+  background-color: white;
   border: 2px solid black;
+  border-radius: 4px;
+  color: blue;
+  margin: 3px;
+  padding: 3px;
 }
+
+.address-location:hover {
+  border: 2px solid black;
+  color: rgb(0, 255, 34);
+  transition: 2s;
+}
+
 .by-town {
   align-items: flex-start;
   display: flex;
