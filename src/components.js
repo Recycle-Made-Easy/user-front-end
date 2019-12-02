@@ -73,7 +73,7 @@ module.exports = {
         }
     },
 
-    localAreaDropdown() {
+    async localAreaDropdown() {
         // Create dropdown.
         const myParent = document.body;
         const selectList = document.createElement("select");
@@ -87,11 +87,14 @@ module.exports = {
         selectList.appendChild(option);
         document.querySelector(".by-town").append(selectList);
 
+        const newLocal = await Config.LocalAreas();
         // Populate dropdown with local area names.
-       Config.LocalAreas().forEach((placeId, name) => {
+
+        
+        newLocal.forEach(localArea => {
             const option = document.createElement("option");
-            option.value = name;
-            option.text = name;
+            option.value = localArea.placeId;
+            option.text = localArea.name;
             selectList.appendChild(option);
             document.querySelector(".by-town").append(selectList);
         })
@@ -114,7 +117,7 @@ module.exports = {
                 console.log(data);
                 for (let index = 0; index < data.length; index++) {
                     const div = document.createElement("div")
-                    div.classList.add(".category-checkbox");                   
+                    div.classList.add(".category-checkbox");
                     const checkbox = document.createElement("input");
                     checkbox.type = "checkbox";
                     checkbox.value = data[index].id;
@@ -131,7 +134,7 @@ module.exports = {
 
     },
 
-    addresses () {
+    addresses() {
         const addressContainer = document.createElement("section");
         addressContainer.classList.add("addresses-container");
         addressContainer.innerHTML = "Recycle Locations:";
@@ -152,9 +155,9 @@ module.exports = {
                         Map.clickedRecyclingCenter(data[index].name)
                     }
                     div.append(link);
-                    addressContainer.append(div);                  
+                    addressContainer.append(div);
                 }
-                })
+            })
     },
 
     googleMap() {
