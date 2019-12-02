@@ -4,7 +4,7 @@ module.exports = {
         return "AIzaSyAZpUBB7ZJkWZnjMIK7bscJVc_6km5D6O4";
     },
 
-    LocalAreas() {
+   LocalAreas() {
         let localAreasMap = new Map();
         localAreasMap.set("Clintonville", "ChIJn3LhCWiMOIgR3Rx6W6VV1PA");
         localAreasMap.set("Columbus", "ChIJcd6QucGJOIgRM7Wxz_hmMuQ");
@@ -12,6 +12,16 @@ module.exports = {
         localAreasMap.set("Hilliard", "ChIJMxtWksaWOIgRnlXah9jo_aE");
         localAreasMap.set("Westerville", "ChIJVyNMY2X1OIgRQT9dsFQwoUY");
         return localAreasMap;
+        // fetch("http://localhost:8080/api/geo/")
+        //     .then(res => res.json())
+        //     .then(function (data) {
+        //         for (let index = 0; index < data.length; index++) {
+        //             localAreasMap.set(data[index].name, data[index].placeId);
+        //         }                
+        //     })
+        //     .then(() => {
+        //         return localAreasMap;
+        //     });
     },
 
     ZipCodes() {
@@ -23,7 +33,7 @@ module.exports = {
         zipCodeMap.set("43224", "ChIJj3ATYruLOIgRMmVSsRFsuQ0");
         return zipCodeMap;
     },
-    
+
     RecycleCenters() {
         let RecycleCentersMap = new Map();
         RecycleCentersMap.set("Mark Gray Enterprises", "ChIJX6FjmMaPOIgRB40RjiCNx6E");
