@@ -88,7 +88,7 @@ module.exports = {
         document.querySelector(".by-town").append(selectList);
 
         // Populate dropdown with local area names.
-        Config.LocalAreas().forEach((placeId, name) => {
+       Config.LocalAreas().forEach((placeId, name) => {
             const option = document.createElement("option");
             option.value = name;
             option.text = name;
@@ -114,9 +114,7 @@ module.exports = {
                 console.log(data);
                 for (let index = 0; index < data.length; index++) {
                     const div = document.createElement("div")
-                    // div.textContent = data[index].name;
-                    div.classList.add(".category-checkbox");                    
-
+                    div.classList.add(".category-checkbox");                   
                     const checkbox = document.createElement("input");
                     checkbox.type = "checkbox";
                     checkbox.value = data[index].id;
@@ -139,25 +137,22 @@ module.exports = {
         addressContainer.innerHTML = "Recycle Locations:";
         document.querySelector(".flex-wrapper-left").append(addressContainer);
 
-
-        fetch("http://localhost:8080/api/recycle-locations")
+        fetch("http://localhost:8080/api/centers")
             .then(res => res.json())
             .then(function (data) {
                 console.log(data);
                 for (let index = 0; index < data.length; index++) {
                     const div = document.createElement("div")
-                    // div.textContent = data[index].name;
                     div.classList.add("address-location");
-                    const link = document.createElement('a')
+                    const link = document.createElement('div')
                     link.classList.add("address-link")
-                    // link.value = data[index].name;
+                    link.value = data[index].name;
                     link.innerHTML = data[index].name;
-                                    // This lengthy method is in the map.js
-                    link.href = Map.clickedRecyclingCenter(data[index].name)
+                    link.onclick = (event) => {
+                        Map.clickedRecyclingCenter(data[index].name)
+                    }
                     div.append(link);
-                    addressContainer.append(div);
-                    
-                    
+                    addressContainer.append(div);                  
                 }
                 })
     },
