@@ -1,8 +1,6 @@
 const Components = require("./components");
+const UserPage = require("./user_page");
 
 Components.header();
-Components.locationForm();
-Components.localAreaDropdown();
-Components.categories();
-Components.addresses();
-Components.googleMap();
+UserPage.displayUserPage();
+
