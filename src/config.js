@@ -5,20 +5,13 @@ module.exports = {
     },
 
     async LocalAreas() {
-        let localAreasMap = [];
-        // localAreasMap.set("Clintonvil+le", "ChIJn3LhCWiMOIgR3Rx6W6VV1PA");
-        // localAreasMap.set("Columbus", "ChIJcd6QucGJOIgRM7Wxz_hmMuQ");
-        // localAreasMap.set("Dublin", "ChIJH6FQ1MTsOIgRKJBoFWgXwgA");
-        // localAreasMap.set("Hilliard", "ChIJMxtWksaWOIgRnlXah9jo_aE");
-        // localAreasMap.set("Westerville", "ChIJVyNMY2X1OIgRQT9dsFQwoUY");
-        // return localAreasMap;
-
+        let localAreas = [];
         await fetch("http://localhost:8080/api/geo/")
             .then(res => res.json())
             .then(function (data) {
-                localAreasMap = data;
+                localAreas = data;
                 });
-        return localAreasMap;
+        return localAreas;
     },
 
     ZipCodes() {
@@ -31,12 +24,14 @@ module.exports = {
         return zipCodeMap;
     },
 
-    RecycleCenters() {
-        let RecycleCentersMap = new Map();
-        RecycleCentersMap.set("Mark Gray Enterprises", "ChIJX6FjmMaPOIgRB40RjiCNx6E");
-        RecycleCentersMap.set("Hugo Neu Recycling", "ChIJEx0OZW6ROIgRp8fDhjF6k9k");
-        return RecycleCentersMap;
-
+    async RecycleCenters() {
+        let RecycleCenters = [];
+        await fetch("http://localhost:8080/api/centers/")
+            .then(res => res.json())
+            .then(function (data) {
+                RecycleCenters = data;
+                });
+        return RecycleCenters;
     }
 
 }

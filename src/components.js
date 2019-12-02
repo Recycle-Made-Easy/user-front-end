@@ -87,10 +87,8 @@ module.exports = {
         selectList.appendChild(option);
         document.querySelector(".by-town").append(selectList);
 
-        const newLocal = await Config.LocalAreas();
         // Populate dropdown with local area names.
-
-        
+        const newLocal = await Config.LocalAreas();
         newLocal.forEach(localArea => {
             const option = document.createElement("option");
             option.value = localArea.placeId;
@@ -114,7 +112,6 @@ module.exports = {
         fetch("http://localhost:8080/api/categories/")
             .then(res => res.json())
             .then(function (data) {
-                console.log(data);
                 for (let index = 0; index < data.length; index++) {
                     const div = document.createElement("div")
                     div.classList.add(".category-checkbox");
@@ -134,30 +131,27 @@ module.exports = {
 
     },
 
-    addresses() {
+    async addresses() {
         const addressContainer = document.createElement("section");
         addressContainer.classList.add("addresses-container");
         addressContainer.innerHTML = "Recycle Locations:";
         document.querySelector(".flex-wrapper-left").append(addressContainer);
 
-        fetch("http://localhost:8080/api/centers")
-            .then(res => res.json())
-            .then(function (data) {
-                console.log(data);
-                for (let index = 0; index < data.length; index++) {
-                    const div = document.createElement("div")
-                    div.classList.add("address-location");
-                    const link = document.createElement('div')
-                    link.classList.add("address-link")
-                    link.value = data[index].name;
-                    link.innerHTML = data[index].name;
-                    link.onclick = (event) => {
-                        Map.clickedRecyclingCenter(data[index].name)
-                    }
-                    div.append(link);
-                    addressContainer.append(div);
-                }
-            })
+        const centers = await Config.RecycleCenters();
+        centers.forEach(center => {
+            const div = document.createElement("div")
+            div.classList.add("address-location");
+            const link = document.createElement('div')
+            link.classList.add("address-link")
+            link.value = center.name;
+            link.innerHTML = center.name;   
+            link.onclick = (event) => {
+                const placeId = center.placeId;
+                Map.displayMapByPlaceId(placeId);
+            }         
+            div.append(link);
+            addressContainer.append(div);
+        })        
     },
 
     googleMap() {

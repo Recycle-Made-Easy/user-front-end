@@ -35,15 +35,6 @@ module.exports = {
     const zipCode = document.querySelector(".location-form__input").value;
     const placeId = Config.ZipCodes().get(zipCode);
     this.displayMapByPlaceId(placeId);
-  },
-
-  clickedRecyclingCenter(name) {
-    // ----------------This next line keeps you on the page when you click something.
-    // event.preventDefault(); 
-    // ----------------This next line selects the anchor tag:
-    // const recyclingCenterCode = document.querySelector(".address-link").value;
-    const placeId = Config.RecycleCenters().get(name);
-    this.displayMapByPlaceId(placeId);
   }
 
 }
