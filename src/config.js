@@ -37,7 +37,7 @@ module.exports = {
     RecycleCenters() {
         let RecycleCentersMap = new Map();
         RecycleCentersMap.set("Mark Gray Enterprises", "ChIJX6FjmMaPOIgRB40RjiCNx6E");
-        RecycleCentersMap.set("Hugo Neu Recycling", "ChIJX6FjmMaPOIgRB40RjiCNx6E");
+        RecycleCentersMap.set("Hugo Neu Recycling", "ChIJEx0OZW6ROIgRp8fDhjF6k9k");
         return RecycleCentersMap;
 
     }
