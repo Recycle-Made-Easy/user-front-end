@@ -181,12 +181,12 @@ label {
   padding: 0.5rem;
   text-decoration: none;
 }
-
+/* 
 .recycling-category-container {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(3, 1fr);
-}
+} */
 
 .submit {
   background-color: green;
