@@ -16,7 +16,15 @@ font-family: 'Nanum Gothic', sans-serif;
 body {
   background-image: linear-gradient(white, var(--some-sky-blue));
   font-family: "Alata", sans-serif;
+  background-size: 150% 150%;
+  top:0px; 
+  bottom: 0px;
+  height: 100%;
+  background-repeat: no-repeat;
+  position: center;
+  overflow-x: hidden;
 }
+
 
 .address-location {
   background-color: white;
