@@ -1,5 +1,6 @@
 const Map = require("./map");
 const Config = require("./config");
+const UserPage = require("./user_page");
 
 module.exports = {
 
@@ -21,11 +22,19 @@ module.exports = {
         const headerTitle = document.createElement("h1");
         headerTitle.innerHTML = "Recycle Made Easy";
         headerTitle.classList.add("header__title");
-        headerLeftSide.append(headerTitle);       
+        headerTitle.href = "javascript:void(0);";
+        headerLeftSide.append(headerTitle);
 
         const contentBody = document.createElement("div");
         contentBody.classList.add("content-wrapper");
         wrapper.append(contentBody);
+
+        headerTitle.onclick = () => {
+            const contentWrapper = document.querySelector(".content-wrapper");
+            if (contentWrapper.innerHTML == "") {
+                UserPage.displayUserPage();
+            }          
+        }
     },
 
     navigation() {
@@ -42,19 +51,28 @@ module.exports = {
         const aLink1 = document.createElement("a");
         aLink1.classList.add("nav__list-item");
         aLink1.textContent = "Local Areas";
-        aLink1.href = "javascript:void(0);"
+        aLink1.href = "javascript:void(0);";
+        aLink1.onclick = () => {
+            document.querySelector(".content-wrapper").innerHTML = "";
+        }
         links.append(aLink1);
 
         const aLink2 = document.createElement("a");
         aLink2.classList.add("nav__list-item");
         aLink2.textContent = "Recycle Centers";
-        aLink2.href = "javascript:void(0);"
+        aLink2.href = "javascript:void(0);";
+        aLink2.onclick = () => {
+            document.querySelector(".content-wrapper").innerHTML = "";
+        }
         links.append(aLink2);
 
         const aLink3 = document.createElement("a");
         aLink3.classList.add("nav__list-item");
         aLink3.textContent = "Recycle Categories";
-        aLink3.href = "javascript:void(0);"
+        aLink3.href = "javascript:void(0);";
+        aLink3.onclick = () => {
+            document.querySelector(".content-wrapper").innerHTML = "";
+        }
         links.append(aLink3);
 
         const navButton = document.createElement("button");

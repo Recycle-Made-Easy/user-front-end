@@ -120,6 +120,10 @@ body {
   padding: 1rem;
 }
 
+.header__title:hover {
+  color: rgb(0, 212, 0);
+}
+
 .input {
   background-color: rgb(167, 221, 167);
 }
@@ -190,8 +194,8 @@ label {
   margin-left: 1.5rem;
   margin-right: 1.5rem;
   padding: 0.35rem;
-  padding-left: .75rem;
-  padding-right: .75rem;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
 }
 
 .nav__button:hover {
@@ -224,7 +228,7 @@ label {
 }
 
 .nav__list-item:hover {
-  color: #9f9f04;
+  color: rgb(0, 212, 0);
 }
 
 /* 
