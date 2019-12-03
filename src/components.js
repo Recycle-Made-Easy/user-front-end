@@ -34,7 +34,31 @@ module.exports = {
             document.querySelector(".content-wrapper").innerHTML = "";
             UserPage.displayUserPage();
         }
+
+        this.navigation();
+        // this.login();
     },
+
+    login() {
+
+        document.querySelector(".nav__button").style.display = "none";
+        const loginButton = document.createElement("button");
+        loginButton.classList.add("login__button");
+        loginButton.textContent = "Login";
+        navContainer.append(loginButton);
+
+        loginButton.onclick = () => {
+            // loginButton.hidden = true;
+            const login = document.querySelector(".nav__button").style.display = "none";
+            if (login.style.display === "block") {
+                login.style.display = "none";
+            } else {
+                login.style.display = "block";
+            }
+        }
+
+    },
+
 
     navigation() {
 
