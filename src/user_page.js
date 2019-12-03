@@ -7,7 +7,7 @@ module.exports = {
         this.locationForm();
         this.localAreaDropdown();
         this.categories();
-        // this.addresses();
+        this.addresses();
         this.googleMap();
     },
 
