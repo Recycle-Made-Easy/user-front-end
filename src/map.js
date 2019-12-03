@@ -18,7 +18,6 @@ module.exports = {
     event.preventDefault();
 
     // Finds which local area name is currently selected in the dropdown.
-   
     const placeId = document.querySelector("#selectList").value;  
 
     // The empty selection in the dropdown will default the map to how it looks when the page first loads.

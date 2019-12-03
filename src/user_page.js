@@ -7,7 +7,7 @@ module.exports = {
         this.locationForm();
         this.localAreaDropdown();
         this.categories();
-        // this.addresses();
+        this.addresses(Config.EndPoints().get("get_all_centers"));
         this.googleMap();
     },
 
@@ -87,22 +87,23 @@ module.exports = {
             const option = document.createElement("option");
             option.value = localArea.placeId;
             option.text = localArea.name;
+            option.id = localArea.id;
             selectList.appendChild(option);
             document.querySelector(".by-town").append(selectList);
         })
-    
+
         // Update Google Map when different local area is selected.
         selectList.addEventListener('change', (event) => {
-            Map.searchByTown();
-            fetch("http://localhost:8080/api/geo/6")
-            .then(res => res.json())
-            .then(function (data) {
-                console.log(data);
-                // addresses();
-            })
+            Map.searchByTown();            
+            const placeId = document.querySelector("#selectList").value;
+            if (placeId == "") {
+                this.addresses(Config.EndPoints().get("get_all_centers"));
+            }
+            const endpoint = Config.EndPoints().get("get_centers_by_placeId") + placeId;
+            this.addresses(endpoint);
         }
-    )
-},
+        )
+    },
 
     categories() {
 
@@ -132,13 +133,22 @@ module.exports = {
 
     },
 
-    async addresses() {
-        const addressContainer = document.createElement("section");
-        addressContainer.classList.add("addresses-container");
-        addressContainer.innerHTML = "Recycle Locations:";
-        document.querySelector(".flex-wrapper-left").append(addressContainer);
+    async addresses(endpoint) {
 
-        const centers = await Config.RecycleCenters();
+        if (document.body.contains(document.querySelector(".addresses-container"))) {
+            const addressContainer = document.querySelector(".addresses-container");
+            addressContainer.innerHTML = "";
+            addressContainer.classList.add("addresses-container");
+            addressContainer.innerHTML = "Recycle Locations:";
+        } else {
+            const addressContainerNew = document.createElement("section");
+            addressContainerNew.classList.add("addresses-container");
+            addressContainerNew.innerHTML = "Recycle Locations:";
+            document.querySelector(".flex-wrapper-left").append(addressContainerNew);
+        }
+
+        const addressContainer = document.querySelector(".addresses-container");
+        const centers = await Config.RecycleCenters(endpoint);
         centers.forEach(center => {
             const div = document.createElement("div")
             div.classList.add("address-location");
