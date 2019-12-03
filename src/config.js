@@ -4,6 +4,13 @@ module.exports = {
         return "AIzaSyAZpUBB7ZJkWZnjMIK7bscJVc_6km5D6O4";
     },
 
+    EndPoints() {
+        let endpoints = new Map();
+        endpoints.set("get_all_centers", "http://localhost:8080/api/centers/");
+        endpoints.set("get_centers_by_placeId", "http://localhost:8080/api/geo/placeId/");        
+        return endpoints;
+    },
+
     async LocalAreas() {
         let localAreas = [];
         await fetch("http://localhost:8080/api/geo/")
@@ -24,9 +31,9 @@ module.exports = {
         return zipCodeMap;
     },
 
-    async RecycleCenters() {
+    async RecycleCenters(endpoint) {
         let RecycleCenters = [];
-        await fetch("http://localhost:8080/api/centers/")
+        await fetch(endpoint)
             .then(res => res.json())
             .then(function (data) {
                 RecycleCenters = data;
