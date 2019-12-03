@@ -3,7 +3,7 @@ module.exports = {
     showAllCategories() {
 
     const categoryContainer = document.createElement("section");
-    categoryContainer.classList.add("recycling-category-container");
+    // categoryContainer.classList.add("recycling-category-container");
     document.querySelector(".content-wrapper").append(categoryContainer);
 
         fetch("http://localhost:8080/api/categories/")
@@ -15,9 +15,37 @@ module.exports = {
                 categoryContainer.append(categoryName);
             }
        });
+       
     },
 
-    adminCategories () {
+    showDeletionSection(){
+
+        const wrapper = document.createElement ("wrapper");
+        wrapper.classList.add("flex-wrapper-outer");
+        document.querySelector(".content-wrapper").append(wrapper);
+
+        const wrapperContainer = document.createElement("wrapper");
+        wrapperContainer.classList.add("deletion-form__container");
+        wrapper.append(wrapperContainer);
+
+        const fieldSet = document.createElement("fieldset");
+        fieldSet.classList.add("deletion-form__fieldset");
+        
+        wrapperContainer.append(fieldSet);
+
+        const locationFormField = document.createElement("button");
+        locationFormField.classList.add("deletion-form__field");
+        fieldSet.append(locationFormField);
+    },
+
+    deleteCategory(){
+        fetch("http://localhost:8080/api/categories/{name}/delete-category")
+        method: "Delete"
+        body: formData
+        .then(res => res.json());
+    },
+
+    adminCategories() {
 
         // I'm not sure if this is necessary
         const categoryContainer = document.createElement("section");
@@ -28,7 +56,7 @@ module.exports = {
         adminCategoriesTitle.innerHTML = "Admin Page For Categories";
         categoryContainer.append(adminCategoriesTitle);
 
-        // This will hold three columns, one for each thing the admin can do: Add, delete, and show all categories.
+        // This might hold three columns, one for each thing the admin can do: Add, delete, and show all categories.
         const adminCategoryWrapper = document.createElement("wrapper");
         adminCategoryWrapper.classList.add("admin-category-wrapper");
         document.querySelector(".admin-category-container").append(adminCategoryWrapper);
@@ -40,9 +68,16 @@ module.exports = {
             
             const showAllTitle = document.createElement("h3");
             showAllTitle.innerHTML = "All categories:";
-            showAllColumn.append(showAllTitle);
+            adminCategoryWrapper.append(showAllTitle);
 
-            showAllCategories();
+            this.showAllCategories();
+
+            // Column 2: For adding categories
+            const deletionColumn = document.createElement("section");
+            deletionColumn.classList.add("admin-column-deletion");
+            adminCategoryWrapper.append(deletionColumn);
+
+            this.showDeletionSection();
     }
 
 

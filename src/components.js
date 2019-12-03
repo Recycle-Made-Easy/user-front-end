@@ -73,7 +73,7 @@ module.exports = {
         aLink3.href = "javascript:void(0);";
         aLink3.onclick = () => {
             document.querySelector(".content-wrapper").innerHTML = "";
-            AdminCat.showAllCategories();
+            AdminCat.adminCategories();
         }
         links.append(aLink3);
 
