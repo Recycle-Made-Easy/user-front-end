@@ -2,7 +2,7 @@
 module.exports = {
 
     displayRecycleCentersPage() {
-
+       
         const wrapper = document.createElement ("wrapper");
         wrapper.classList.add("flex-wrapper-outer");
         
@@ -69,8 +69,8 @@ module.exports = {
         inputLocationZipCode.classList.add("location-form__input");
         inputLocationZipCode.innerHTML = "Name";
         locationFormField.append(inputLocationZipCode);
+    }
 
-    },
+    }
 
     
-}
