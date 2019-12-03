@@ -1,6 +1,7 @@
 const Map = require("./map");
 const Config = require("./config");
 const UserPage = require("./user_page");
+const AdminCat = require("./category_admin");
 const recycle_centers = require("./recycle_centers")
 
 module.exports = {
@@ -87,6 +88,7 @@ module.exports = {
         aLink3.href = "javascript:void(0);";
         aLink3.onclick = () => {
             document.querySelector(".content-wrapper").innerHTML = "";
+            AdminCat.adminCategories();
         }
         links.append(aLink3);
 

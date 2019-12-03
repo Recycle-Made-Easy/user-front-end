@@ -38,14 +38,10 @@ module.exports = {
         dropDownDiv.classList.add("dropdown");
         locationWrapper.append(dropDownDiv);
 
-        const byTown = document.createElement("div");
+        const byTown = document.createElement("p");
         byTown.innerHTML = "By town";
         byTown.classList.add("by-town");
         dropDownDiv.append(byTown);
-
-        const selectContainer = document.createElement("div");
-        selectContainer.classList.add("dropdown-select");
-        dropDownDiv.append(selectContainer);
 
         const zipCodeForm = document.createElement("form");
         zipCodeForm.classList.add("form");
@@ -73,10 +69,9 @@ module.exports = {
 
     async localAreaDropdown() {
         // Create dropdown.
-        const myParent = document.querySelector(".dropdown-select");
+        const myParent = document.body;
         const selectList = document.createElement("select");
         selectList.id = "selectList";
-        selectList.classList.add("selectList");
         myParent.appendChild(selectList);
 
         // Displays first option in the dropdown as empty.
@@ -84,6 +79,7 @@ module.exports = {
         option.value = "";
         option.text = "";
         selectList.appendChild(option);
+        document.querySelector(".by-town").append(selectList);
 
         // Populate dropdown with local area names.
         const newLocal = await Config.LocalAreas();
@@ -93,6 +89,7 @@ module.exports = {
             option.text = localArea.name;
             option.id = localArea.id;
             selectList.appendChild(option);
+            document.querySelector(".by-town").append(selectList);
         })
 
         // Update Google Map when different local area is selected.
