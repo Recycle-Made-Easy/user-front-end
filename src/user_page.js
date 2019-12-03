@@ -7,7 +7,7 @@ module.exports = {
         this.locationForm();
         this.localAreaDropdown();
         this.categories();
-        this.addresses();
+        // this.addresses();
         this.googleMap();
     },
 
@@ -93,12 +93,19 @@ module.exports = {
             option.text = localArea.name;
             selectList.appendChild(option);
         })
-
+    
         // Update Google Map when different local area is selected.
         selectList.addEventListener('change', (event) => {
             Map.searchByTown();
-        });
-    },
+            fetch("http://localhost:8080/api/geo/6")
+            .then(res => res.json())
+            .then(function (data) {
+                console.log(data);
+                // addresses();
+            })
+        }
+    )
+},
 
     categories() {
 
