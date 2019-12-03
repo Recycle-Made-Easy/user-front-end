@@ -47,15 +47,6 @@ module.exports = {
         links.classList.add("nav__list");
         navContainer.append(links);
 
-        const aLink1 = document.createElement("a");
-        aLink1.classList.add("nav__list-item");
-        aLink1.textContent = "Local Areas";
-        aLink1.href = "javascript:void(0);";
-        aLink1.onclick = () => {
-            document.querySelector(".content-wrapper").innerHTML = "";
-        }
-        links.append(aLink1);
-
         const aLink2 = document.createElement("a");
         aLink2.classList.add("nav__list-item");
         aLink2.textContent = "Recycle Centers";
