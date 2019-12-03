@@ -1,6 +1,7 @@
 const Map = require("./map");
 const Config = require("./config");
 const UserPage = require("./user_page");
+const recycle_centers = require("./recycle_centers")
 
 module.exports = {
 
@@ -63,6 +64,7 @@ module.exports = {
         aLink2.href = "javascript:void(0);";
         aLink2.onclick = () => {
             document.querySelector(".content-wrapper").innerHTML = "";
+            recycle_centers.displayRecycleCentersPage();
         }
         links.append(aLink2);
 
