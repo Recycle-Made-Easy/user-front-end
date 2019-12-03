@@ -1,6 +1,7 @@
 const Map = require("./map");
 const Config = require("./config");
 const UserPage = require("./user_page");
+const recycle_centers = require("./recycle_centers")
 
 module.exports = {
 
@@ -29,11 +30,9 @@ module.exports = {
         contentBody.classList.add("content-wrapper");
         wrapper.append(contentBody);
 
-        headerTitle.onclick = () => {
-            const contentWrapper = document.querySelector(".content-wrapper");
-            if (contentWrapper.innerHTML == "") {
-                UserPage.displayUserPage();
-            }          
+        headerTitle.onclick = () => {     
+            document.querySelector(".content-wrapper").innerHTML = "";
+            UserPage.displayUserPage();
         }
     },
 
@@ -63,6 +62,7 @@ module.exports = {
         aLink2.href = "javascript:void(0);";
         aLink2.onclick = () => {
             document.querySelector(".content-wrapper").innerHTML = "";
+            recycle_centers.displayRecycleCentersPage();
         }
         links.append(aLink2);
 
