@@ -157,13 +157,22 @@ module.exports = {
                         // find which categories are selected
                         const checkboxes = document.getElementsByName("category-checkbox");
                         const selectedCategories = [];
-                        let categoryId; // temporary; backend doesn't accept array yet
                         checkboxes.forEach(box => {
                             if (box.checked) {
                                 selectedCategories.push(box.value);
-                                categoryId = box.value;
+                                let categoryClicked = true;
+                                return categoryClicked;
+                                // Do something to filter function a few lines down
+                                //That filter function is applied to the array of centers.
                             }
                         })
+
+                        // This function will take some output from the `checkboxes.forEach(box =>` 
+                        // below and this function can then be used as a parameter for a filter() 
+                        // that can be used on the list of centers.
+                        const filterOutCenters = function (boolean){
+                            
+                        }
 
                         // find if a city is selected
                         let city = document.querySelector("#selectList").value;
