@@ -83,25 +83,31 @@ body {
 }
 
 .flex-wrapper-left {
+  align-items: flex-start;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  align-items: flex-start;
-
   margin: 35px;
 }
 
 .flex-wrapper-outer {
+  /* This `align-items` is what allows the items (most importantly, the map!) 
+  to start at the top of the page. */
+  align-items: flex-start;
   display: flex;
   justify-content: center;
-  align-items: center;
 }
 
 .google-map {
-  overflow: hidden;
-  padding-bottom: 40%;
-  position: relative;
+  border-radius: 4px;
+  border-style: solid;
+  border-width: 5px;
+  border-color: var(--oscar-the-grouch);
   height: 0;
+  overflow: hidden;
+  /* This is what affects if the map fits in the black box */
+  padding-bottom: 30%;
+  position: relative;
 }
 
 .google-map__iframe {
