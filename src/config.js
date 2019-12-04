@@ -7,7 +7,9 @@ module.exports = {
     EndPoints() {
         let endpoints = new Map();
         endpoints.set("get_all_centers", "http://localhost:8080/api/centers/");
-        endpoints.set("get_centers_by_placeId", "http://localhost:8080/api/geo/placeId/");        
+        endpoints.set("get_centers_by_placeId", "http://localhost:8080/api/geo/placeId/"); // + placeId
+        endpoints.set("get_list_of_cities", "http://localhost:8080/api/centers/cities");  
+        endpoints.set("get_centers_by_city", "http://localhost:8080/api/centers/city/"); // + city name
         return endpoints;
     },
 
@@ -31,14 +33,14 @@ module.exports = {
         return zipCodeMap;
     },
 
-    async RecycleCenters(endpoint) {
-        let RecycleCenters = [];
+    async FetchData(endpoint) {
+        let fetchedData = [];
         await fetch(endpoint)
             .then(res => res.json())
             .then(function (data) {
-                RecycleCenters = data;
+                fetchedData = data;
                 });
-        return RecycleCenters;
+        return fetchedData;
     }
 
 }

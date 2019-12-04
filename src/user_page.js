@@ -39,7 +39,7 @@ module.exports = {
         locationWrapper.append(dropDownDiv);
 
         const byTown = document.createElement("p");
-        byTown.innerHTML = "By town";
+        byTown.innerHTML = "By city";
         byTown.classList.add("by-town");
         dropDownDiv.append(byTown);
 
@@ -82,24 +82,42 @@ module.exports = {
         document.querySelector(".by-town").append(selectList);
 
         // Populate dropdown with local area names.
-        const newLocal = await Config.LocalAreas();
-        newLocal.forEach(localArea => {
+        // const newLocal = await Config.LocalAreas();
+        // newLocal.forEach(localArea => {
+        //     const option = document.createElement("option");
+        //     option.value = localArea.placeId;
+        //     option.text = localArea.name;
+        //     option.id = localArea.id;
+        //     selectList.appendChild(option);
+        //     document.querySelector(".by-town").append(selectList);
+        // })       
+        
+        // Populate dropdown with a list of cities we have recycle centers for.
+        const endpoint = Config.EndPoints().get("get_list_of_cities");
+        const cities = await Config.FetchData(endpoint);
+        cities.forEach(city => {
             const option = document.createElement("option");
-            option.value = localArea.placeId;
-            option.text = localArea.name;
-            option.id = localArea.id;
+            option.text = city;
+            option.value = city;
             selectList.appendChild(option);
             document.querySelector(".by-town").append(selectList);
-        })
+        })  
 
         // Update Google Map when different local area is selected.
         selectList.addEventListener('change', (event) => {
-            Map.searchByTown();            
-            const placeId = document.querySelector("#selectList").value;
-            if (placeId == "") {
+            // Map.searchByTown();            
+            // const placeId = document.querySelector("#selectList").value;
+            // if (placeId == "") {
+            //     this.addresses(Config.EndPoints().get("get_all_centers"));
+            // }
+            // const endpoint = Config.EndPoints().get("get_centers_by_placeId") + placeId;
+            // this.addresses(endpoint);
+
+            const city = document.querySelector("#selectList").value;
+            if (city == "") {
                 this.addresses(Config.EndPoints().get("get_all_centers"));
             }
-            const endpoint = Config.EndPoints().get("get_centers_by_placeId") + placeId;
+            const endpoint = Config.EndPoints().get("get_centers_by_city") + city;
             this.addresses(endpoint);
         }
         )
@@ -148,7 +166,7 @@ module.exports = {
         }
 
         const addressContainer = document.querySelector(".addresses-container");
-        const centers = await Config.RecycleCenters(endpoint);
+        const centers = await Config.FetchData(endpoint);
         centers.forEach(center => {
             const div = document.createElement("div")
             div.classList.add("address-location");
