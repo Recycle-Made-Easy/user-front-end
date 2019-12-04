@@ -157,70 +157,71 @@ module.exports = {
                         // find which categories are selected
                         const checkboxes = document.getElementsByName("category-checkbox");
                         const selectedCategories = [];
+                        const filteredCenters = [];
                         checkboxes.forEach(box => {
+
                             if (box.checked) {
                                 selectedCategories.push(box.value);
-                                let categoryClicked = true;
-                                return categoryClicked;
-                                // Do something to filter function a few lines down
-                                //That filter function is applied to the array of centers.
+                                let city = document.querySelector("#selectList").value;
+                                const url = "http://localhost:8080/api/categories/filter/"+city+box.value;
+                                const options = { method: "GET", mode: "no-cors", headers: {"Accept": "application/json"}}
+                                fetch(url, options)
+                                    .then(res => res.json())
+                                    .then(function (data) {
+                                        console.log(data);
+                                    })
                             }
                         })
 
-                        // This function will take some output from the `checkboxes.forEach(box =>` 
-                        // below and this function can then be used as a parameter for a filter() 
-                        // that can be used on the list of centers.
-                        const filterOutCenters = function (boolean){
-                            
-                        }
+
 
                         // find if a city is selected
-                        let city = document.querySelector("#selectList").value;
-                        endpoint = Config.EndPoints().get("get_filtered_centers"); // resets endpoint
-                        if (!city == "") {
-                            // city is not null, so it'll need to be included in the filtered list
-                            // this endpoint will need updated to accept an array of ids instead of just one
-                            endpoint = endpoint + city + "/" + categoryId;
-                        } else {
-                            // city is null, so just filter on categories
-                            endpoint = endpoint + categoryId;
-                        }
+                        // let city = document.querySelector("#selectList").value;
+                        // endpoint = Config.EndPoints().get("get_filtered_centers"); // resets endpoint
+                        // if (!city == "") {
+                        //     // city is not null, so it'll need to be included in the filtered list
+                        //     // this endpoint will need updated to accept an array of ids instead of just one
+                        //     endpoint = endpoint + city + "/" + categoryId;
+                        // } else {
+                        //     // city is null, so just filter on categories
+                        //     endpoint = endpoint + categoryId;
+                        // }
                         // updates the list of recycle centers
-                        console.log(endpoint);
+                        // console.log(endpoint);
                         // Components.addresses(endpoint); // doesn't seem to work here
                         // stuff below is copied from this.addresses()...
-                        if (document.body.contains(document.querySelector(".addresses-container"))) {
-                            const addressContainer = document.querySelector(".addresses-container");
-                            addressContainer.innerHTML = "";
-                            addressContainer.classList.add("addresses-container");
-                            addressContainer.innerHTML = "Recycle Locations:";
-                        } else {
-                            const addressContainerNew = document.createElement("section");
-                            addressContainerNew.classList.add("addresses-container");
-                            addressContainerNew.innerHTML = "Recycle Locations:";
-                            document.querySelector(".flex-wrapper-left").append(addressContainerNew);
-                        }
+                        // if (document.body.contains(document.querySelector(".addresses-container"))) {
+                        //     const addressContainer = document.querySelector(".addresses-container");
+                        //     addressContainer.innerHTML = "";
+                        //     addressContainer.classList.add("addresses-container");
+                        //     addressContainer.innerHTML = "Recycle Locations:";
+                        // } else {
+                        //     const addressContainerNew = document.createElement("section");
+                        //     addressContainerNew.classList.add("addresses-container");
+                        //     addressContainerNew.innerHTML = "Recycle Locations:";
+                        //     document.querySelector(".flex-wrapper-left").append(addressContainerNew);
+                        // }
 
-                        const addressContainer = document.querySelector(".addresses-container");
+                        // const addressContainer = document.querySelector(".addresses-container");
 
-                        fetch(endpoint)
-                            .then(res => res.json())
-                            .then(function (data) {
-                                for (let index = 0; index < data.length; index++) {
-                                    const div = document.createElement("div")
-                                    div.classList.add("address-location");
-                                    const link = document.createElement('div')
-                                    link.classList.add("address-link")
-                                    link.value = center.name;
-                                    link.innerHTML = center.name;
-                                    link.onclick = (event) => {
-                                        const placeId = center.placeId;
-                                        Map.displayMapByPlaceId(placeId);
-                                    }
-                                    div.append(link);
-                                    addressContainer.append(div);
-                                }
-                            })
+                        // fetch(endpoint)
+                        //     .then(res => res.json())
+                        //     .then(function (data) {
+                        //         for (let index = 0; index < data.length; index++) {
+                        //             const div = document.createElement("div")
+                        //             div.classList.add("address-location");
+                        //             const link = document.createElement('div')
+                        //             link.classList.add("address-link")
+                        //             link.value = center.name;
+                        //             link.innerHTML = center.name;
+                        //             link.onclick = (event) => {
+                        //                 const placeId = center.placeId;
+                        //                 Map.displayMapByPlaceId(placeId);
+                        //             }
+                        //             div.append(link);
+                        //             addressContainer.append(div);
+                        //         }
+                        //     })
                     })
                 }
             })
