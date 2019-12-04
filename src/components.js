@@ -31,7 +31,7 @@ module.exports = {
         contentBody.classList.add("content-wrapper");
         wrapper.append(contentBody);
 
-        headerTitle.onclick = () => {     
+        headerTitle.onclick = () => {
             document.querySelector(".content-wrapper").innerHTML = "";
             UserPage.displayUserPage();
         }
@@ -110,6 +110,38 @@ module.exports = {
         }
 
 
+    },
+
+    async addresses(endpoint) {
+
+        if (document.body.contains(document.querySelector(".addresses-container"))) {
+            const addressContainer = document.querySelector(".addresses-container");
+            addressContainer.innerHTML = "";
+            addressContainer.classList.add("addresses-container");
+            addressContainer.innerHTML = "Recycle Locations:";
+        } else {
+            const addressContainerNew = document.createElement("section");
+            addressContainerNew.classList.add("addresses-container");
+            addressContainerNew.innerHTML = "Recycle Locations:";
+            document.querySelector(".flex-wrapper-left").append(addressContainerNew);
+        }
+
+        const addressContainer = document.querySelector(".addresses-container");
+        const centers = await Config.FetchData(endpoint);
+        centers.forEach(center => {
+            const div = document.createElement("div")
+            div.classList.add("address-location");
+            const link = document.createElement('div')
+            link.classList.add("address-link")
+            link.value = center.name;
+            link.innerHTML = center.name;
+            link.onclick = (event) => {
+                const placeId = center.placeId;
+                Map.displayMapByPlaceId(placeId);
+            }
+            div.append(link);
+            addressContainer.append(div);
+        })
     }
 
 
