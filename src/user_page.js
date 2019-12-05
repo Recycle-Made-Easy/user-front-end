@@ -82,17 +82,6 @@ module.exports = {
         selectList.appendChild(option);
         document.querySelector(".by-town").append(selectList);
 
-        // Populate dropdown with local area names.
-        // const newLocal = await Config.LocalAreas();
-        // newLocal.forEach(localArea => {
-        //     const option = document.createElement("option");
-        //     option.value = localArea.placeId;
-        //     option.text = localArea.name;
-        //     option.id = localArea.id;
-        //     selectList.appendChild(option);
-        //     document.querySelector(".by-town").append(selectList);
-        // })       
-
         // Populate dropdown with a list of cities we have recycle centers for.
         const endpoint = Config.EndPoints().get("get_list_of_cities");
         const cities = await Config.FetchData(endpoint);
@@ -152,67 +141,100 @@ module.exports = {
                         console.log("Checkbox with category id " + checkbox.value + " was clicked on.");
 
                         // find which categories are selected
-                        const checkboxes = document.getElementsByName("category-checkbox");
-                        const selectedCategories = [];
-                        const filteredCenters = [];
-                        checkboxes.forEach(box => {
+                        // const checkboxes = document.getElementsByName("category-checkbox");
+                        // const selectedCategories = [];   
 
-                            if (box.checked) {
-                                selectedCategories.push(box.value);
-                                // (in the next line, 'city' is the city ID)
-                                let city = document.querySelector("#selectList").value;
-                                const url = "http://localhost:8080/api/centers/filter/" + city + "/" + box.value;
-                                const options = { method: "GET", headers: { "Accept": "application/json" } }
+                        console.log("inside event listener but before the checkboxes.forEach");
+                        // checkboxes.forEach(box => {
 
-                                if (document.body.contains(document.querySelector(".addresses-container"))) {
-                                    const addressContainer = document.querySelector(".addresses-container");
-                                    addressContainer.innerHTML = "";
-                                    addressContainer.classList.add("addresses-container");
-                                    addressContainer.innerHTML = "Recycle Locations:";
-                                } else {
-                                    const addressContainerNew = document.createElement("section");
-                                    addressContainerNew.classList.add("addresses-container");
-                                    addressContainerNew.innerHTML = "Recycle Locations:";
-                                    document.querySelector(".flex-wrapper-left").append(addressContainerNew);
-                                }
-
-                                const addressContainer = document.querySelector(".addresses-container");
-
-                                fetch(url, options)
-                                    .then(res => res.json())
-                                    .then(function (centers) {
-                                        console.log(centers);
-                                        // Redisplay Address List -------------------------
-                                        centers.forEach(center => {
-                                            console.log(center.name);
-                                            console.log(center.placeId);
-                                            const div = document.createElement("div")
-                                            div.classList.add("address-location");
-                                            const link = document.createElement('div')
-                                            link.classList.add("address-link")
-                                            link.value = center.name;
-                                            link.innerHTML = center.name;
-                                            link.onclick = (event) => {
-                                                const placeId = center.placeId;
-                                                Map.displayMapByPlaceId(placeId);
-                                            }
-                                            div.append(link);
-                                            addressContainer.append(div);
-                                        })
-                                        // ------------------------------------------------
-
-                                    });
-
-                            }
-                        })
+                        if (checkbox.checked) {
+                            console.log("I clicked a checkbox; am inside the if for box.checked");
+                            // selectedCategories.push(checkbox.value);
+                            // (in the next line, 'city' is the city ID)
+                            let city = document.querySelector("#selectList").value;
+                            const url = "http://localhost:8080/api/centers/filter/" + city + "/" + checkbox.value;
+                            const options = { method: "GET", headers: { "Accept": "application/json" } }
 
 
 
+                            const addressContainer = document.querySelector(".addresses-container");
+                            addressContainer.innerHTML = "";
+                            addressContainer.innerHTML = "Recycle Locations:";
+
+                            fetch(url, options)
+                                .then(res => res.json())
+                                .then(function (centers) {
+                                    console.log(centers);
+                                    // Redisplay Address List -------------------------
+                                    centers.forEach(center => {
+                                        console.log("inside fetch for checking box");
+                                        console.log(center.name);
+                                        console.log(center.placeId);
+                                        const div = document.createElement("div")
+                                        div.classList.add("address-location");
+                                        const link = document.createElement('div')
+                                        link.classList.add("address-link")
+                                        link.value = center.name;
+                                        link.innerHTML = center.name;
+                                        link.onclick = (event) => {
+                                            const placeId = center.placeId;
+                                            Map.displayMapByPlaceId(placeId);
+                                        }
+                                        div.append(link);
+                                        addressContainer.append(div);
+                                    })
+                                    console.log("outside fetch for checking box");
+                                    // ------------------------------------------------
+
+                                });
+
+                        } else if (!checkbox.checked) {
+                            console.log("inside else if for unchecking box");
+                            console.log("Fine day for some code~");
+                            // selectedCategories.push(checkbox.value);
+                            // (in the next line, 'city' is the city ID)
+                            let city = document.querySelector("#selectList").value;
+                            const url = "http://localhost:8080/api/centers/city/" + city;
+                            const options = { method: "GET", headers: { "Accept": "application/json" } }
+
+                            const addressContainer = document.querySelector(".addresses-container");
+                            addressContainer.innerHTML = "";
+                            addressContainer.innerHTML = "Recycle Locations:";
+
+                            fetch(url, options)
+                                .then(res => res.json())
+                                .then(function (centers) {
+                                    console.log(centers);
+                                    // Redisplay Address List -------------------------
+                                    centers.forEach(center => {
+                                        console.log("inside fetch for unchecking box");
+                                        console.log(center.name);
+                                        console.log(center.placeId);
+                                        const div = document.createElement("div")
+                                        div.classList.add("address-location");
+                                        const link = document.createElement('div')
+                                        link.classList.add("address-link")
+                                        link.value = center.name;
+                                        link.innerHTML = center.name;
+                                        link.onclick = (event) => {
+                                            const placeId = center.placeId;
+                                            Map.displayMapByPlaceId(placeId);
+                                        }
+                                        div.append(link);
+                                        addressContainer.append(div);
+                                    })
+                                    console.log("outside fetch for unchecking box");
+                                    // ------------------------------------------------
+
+                                }); // end fetch for unchecking a checkbox
+
+                        } // end of else if for unchecking a checkbox
 
                     })
                 }
             })
     },
+
 
 
 
