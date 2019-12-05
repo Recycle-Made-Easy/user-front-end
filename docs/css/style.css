@@ -103,16 +103,18 @@ body {
   border-style: solid;
   border-width: 5px;
   border-color: var(--oscar-the-grouch);
-  height: 0;
+  height: 100%;
+  width: 100%;
   overflow: hidden;
   /* This is what affects if the map fits in the black box */
-  padding-bottom: 30%;
+  max-width: 550px;
+  max-height: 1000px;
   position: relative;
 }
 
 .google-map__iframe {
-  width: 600;
-  height: 450;
+  width: 100%;
+  height: 100%;
   border: 0;
 }
 
