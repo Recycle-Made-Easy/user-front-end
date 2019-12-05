@@ -162,9 +162,10 @@ module.exports = {
 
                             if (box.checked) {
                                 selectedCategories.push(box.value);
+                                // (in the next line, 'city' is the city ID)
                                 let city = document.querySelector("#selectList").value;
-                                const url = "http://localhost:8080/api/categories/filter/"+city+box.value;
-                                const options = { method: "GET", mode: "no-cors", headers: {"Accept": "application/json"}}
+                                const url = "http://localhost:8080/api/categories/filter/"+city+"/"+box.value;
+                                const options = { method: "GET", headers: {"Accept": "application/json"}}
                                 fetch(url, options)
                                     .then(res => res.json())
                                     .then(function (data) {
