@@ -164,7 +164,7 @@ module.exports = {
                                 selectedCategories.push(box.value);
                                 // (in the next line, 'city' is the city ID)
                                 let city = document.querySelector("#selectList").value;
-                                const url = "http://localhost:8080/api/categories/filter/"+city+"/"+box.value;
+                                const url = "http://localhost:8080/api/centers/filter/"+city+"/"+box.value;
                                 const options = { method: "GET", headers: {"Accept": "application/json"}}
                                 fetch(url, options)
                                     .then(res => res.json())
