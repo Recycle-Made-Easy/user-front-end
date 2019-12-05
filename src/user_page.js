@@ -130,9 +130,6 @@ module.exports = {
         categoryContainer.classList.add("recycling-category-container");
         document.querySelector(".flex-wrapper-left").append(categoryContainer);
 
-        // endpoint is updated inside the fetch but needs to be outside to have access to this.addresses()
-        let endpoint = Config.EndPoints().get("get_filtered_centers");
-
         fetch("http://localhost:8080/api/categories/")
             .then(res => res.json())
             .then(function (data) {
@@ -164,65 +161,54 @@ module.exports = {
                                 selectedCategories.push(box.value);
                                 // (in the next line, 'city' is the city ID)
                                 let city = document.querySelector("#selectList").value;
-                                const url = "http://localhost:8080/api/categories/filter/"+city+"/"+box.value;
-                                const options = { method: "GET", headers: {"Accept": "application/json"}}
+                                const url = "http://localhost:8080/api/centers/filter/" + city + "/" + box.value;
+                                const options = { method: "GET", headers: { "Accept": "application/json" } }
+
+                                if (document.body.contains(document.querySelector(".addresses-container"))) {
+                                    const addressContainer = document.querySelector(".addresses-container");
+                                    addressContainer.innerHTML = "";
+                                    addressContainer.classList.add("addresses-container");
+                                    addressContainer.innerHTML = "Recycle Locations:";
+                                } else {
+                                    const addressContainerNew = document.createElement("section");
+                                    addressContainerNew.classList.add("addresses-container");
+                                    addressContainerNew.innerHTML = "Recycle Locations:";
+                                    document.querySelector(".flex-wrapper-left").append(addressContainerNew);
+                                }
+
+                                const addressContainer = document.querySelector(".addresses-container");
+
                                 fetch(url, options)
                                     .then(res => res.json())
-                                    .then(function (data) {
-                                        console.log(data);
-                                    })
+                                    .then(function (centers) {
+                                        console.log(centers);
+                                        // Redisplay Address List -------------------------
+                                        centers.forEach(center => {
+                                            console.log(center.name);
+                                            console.log(center.placeId);
+                                            const div = document.createElement("div")
+                                            div.classList.add("address-location");
+                                            const link = document.createElement('div')
+                                            link.classList.add("address-link")
+                                            link.value = center.name;
+                                            link.innerHTML = center.name;
+                                            link.onclick = (event) => {
+                                                const placeId = center.placeId;
+                                                Map.displayMapByPlaceId(placeId);
+                                            }
+                                            div.append(link);
+                                            addressContainer.append(div);
+                                        })
+                                        // ------------------------------------------------
+
+                                    });
+
                             }
                         })
 
 
 
-                        // find if a city is selected
-                        // let city = document.querySelector("#selectList").value;
-                        // endpoint = Config.EndPoints().get("get_filtered_centers"); // resets endpoint
-                        // if (!city == "") {
-                        //     // city is not null, so it'll need to be included in the filtered list
-                        //     // this endpoint will need updated to accept an array of ids instead of just one
-                        //     endpoint = endpoint + city + "/" + categoryId;
-                        // } else {
-                        //     // city is null, so just filter on categories
-                        //     endpoint = endpoint + categoryId;
-                        // }
-                        // updates the list of recycle centers
-                        // console.log(endpoint);
-                        // Components.addresses(endpoint); // doesn't seem to work here
-                        // stuff below is copied from this.addresses()...
-                        // if (document.body.contains(document.querySelector(".addresses-container"))) {
-                        //     const addressContainer = document.querySelector(".addresses-container");
-                        //     addressContainer.innerHTML = "";
-                        //     addressContainer.classList.add("addresses-container");
-                        //     addressContainer.innerHTML = "Recycle Locations:";
-                        // } else {
-                        //     const addressContainerNew = document.createElement("section");
-                        //     addressContainerNew.classList.add("addresses-container");
-                        //     addressContainerNew.innerHTML = "Recycle Locations:";
-                        //     document.querySelector(".flex-wrapper-left").append(addressContainerNew);
-                        // }
 
-                        // const addressContainer = document.querySelector(".addresses-container");
-
-                        // fetch(endpoint)
-                        //     .then(res => res.json())
-                        //     .then(function (data) {
-                        //         for (let index = 0; index < data.length; index++) {
-                        //             const div = document.createElement("div")
-                        //             div.classList.add("address-location");
-                        //             const link = document.createElement('div')
-                        //             link.classList.add("address-link")
-                        //             link.value = center.name;
-                        //             link.innerHTML = center.name;
-                        //             link.onclick = (event) => {
-                        //                 const placeId = center.placeId;
-                        //                 Map.displayMapByPlaceId(placeId);
-                        //             }
-                        //             div.append(link);
-                        //             addressContainer.append(div);
-                        //         }
-                        //     })
                     })
                 }
             })
