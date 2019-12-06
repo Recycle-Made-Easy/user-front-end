@@ -1,12 +1,5 @@
-@import url("https://fonts.googleapis.com/css?family=Happy+Monkey|Jua|Nanum+Gothic|Overlock+SC|Sniglet&display=swap");
+@import url('https://fonts.googleapis.com/css?family=Sulphur+Point&display=swap');
 
-/*
-font-family: 'Happy Monkey', cursive;
-font-family: 'Overlock SC', cursive;
-font-family: 'Sniglet', cursive;
-font-family: 'Jua', sans-serif;
-font-family: 'Nanum Gothic', sans-serif;
-*/
 
 :root {
   --oscar-the-grouch: green;
@@ -15,9 +8,9 @@ font-family: 'Nanum Gothic', sans-serif;
 
 body {
   background-image: linear-gradient(white, var(--some-sky-blue));
-  font-family: "Alata", sans-serif;
   background-size: 150% 150%;
   top:0px; 
+  font-family: 'Sulphur Point', sans-serif;
   bottom: 0px;
   height: 100%;
   background-repeat: no-repeat;
@@ -191,7 +184,6 @@ label {
   align-self: center;
   background-color: #18364b;
   color: #e2ecf2;
-  font-family: "Alata", sans-serif;
   font-size: 1.25rem;
   padding: 0.25rem;
   width: 100%;
