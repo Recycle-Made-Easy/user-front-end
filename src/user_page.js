@@ -146,6 +146,7 @@ module.exports = {
                             const addressContainer = document.querySelector(".addresses-container");
                             addressContainer.innerHTML = "";
                             addressContainer.innerHTML = "Recycle Locations:";
+                            addressContainer.classList.add("recycle-locations");
 
                             fetch(url, options)
                                 .then(res => res.json())
