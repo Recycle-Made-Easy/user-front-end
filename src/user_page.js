@@ -57,15 +57,13 @@ module.exports = {
         inputType.classList.add("location-form__input");
         zipCodeForm.append(inputType);
 
-        const zipCodeList = Config.ZipCodes().keys();
-        console.log(zipCodeList);
-
-        inputType.oninput = (event) => {
-            let zipCodeEntered = inputType.value;
-            if(zipCodeEntered.length == 5){
-                console.log(zipCodeEntered);
-                Map.searchByZipCode();
-            }          
+        const submitButton = document.createElement("button");
+        submitButton.innerHTML = "Submit";
+        submitButton.classList.add("submit");
+        submitButton.classList.add("location-form__button");
+        zipCodeForm.append(submitButton);
+        submitButton.onclick = (event) => {
+            Map.searchByZipCode();
         }
     },
 
@@ -180,6 +178,7 @@ module.exports = {
                                 .then(res => res.json())
                                 .then(function (centers) {
                                     console.log(centers);
+                                    
                                     centers.forEach(center => {
                                         console.log("inside fetch for unchecking box");
                                         console.log(center.name);
@@ -199,6 +198,7 @@ module.exports = {
                                     })
                                     console.log("outside fetch for unchecking box");
                                 }); 
+
                         } 
 
                     })
@@ -239,6 +239,7 @@ module.exports = {
     },
 
     googleMap() {
+        // Adds Google Map to the page.
         const googleMap = document.createElement("div");
         googleMap.classList.add("google-map");
         document.querySelector(".flex-wrapper-outer").append(googleMap);
