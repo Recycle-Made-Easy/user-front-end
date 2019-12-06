@@ -57,13 +57,21 @@ module.exports = {
         inputType.placeholder = "By ZIP code...";
         zipCodeForm.append(inputType);
 
-        const submitButton = document.createElement("button");
-        submitButton.innerHTML = "Submit";
-        submitButton.classList.add("submit");
-        submitButton.classList.add("location-form__button");
-        zipCodeForm.append(submitButton);
-        submitButton.onclick = (event) => {
-            Map.searchByZipCode();
+        inputType.oninput = (event) => {
+            let zipCodeEntered = inputType.value
+            
+            if(zipCodeEntered.length == 5){
+                Map.searchByZipCode();
+            }          
+
+
+        // const submitButton = document.createElement("button");
+        // submitButton.innerHTML = "Submit";
+        // submitButton.classList.add("submit");
+        // submitButton.classList.add("location-form__button");
+        // zipCodeForm.append(submitButton);
+        // submitButton.onclick = (event) => {
+        //    
         }
     },
 
