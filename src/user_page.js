@@ -1,6 +1,5 @@
 const Map = require("./map");
 const Config = require("./config");
-// const Components = require("./components");
 
 module.exports = {
 
@@ -27,7 +26,7 @@ module.exports = {
         flexWrapperLeft.append(locationSelectionContainer);
 
         const dropDownMenuTitle = document.createElement("h3");
-        dropDownMenuTitle.innerHTML = "Select A Location";
+        dropDownMenuTitle.innerHTML = "Select a Location";
         dropDownMenuTitle.classList.add("location-selection-header");
         locationSelectionContainer.append(dropDownMenuTitle);
 
@@ -40,7 +39,6 @@ module.exports = {
         locationWrapper.append(dropDownDiv);
 
         const byTown = document.createElement("p");
-        byTown.innerHTML = "By city";
         byTown.classList.add("by-town");
         dropDownDiv.append(byTown);
 
@@ -49,26 +47,22 @@ module.exports = {
         locationWrapper.append(zipCodeForm);
 
         const zipCodeName = document.createElement("label");
-        zipCodeName.textContent = "By Zip code";
         zipCodeName.classList.add("name");
         zipCodeForm.append(zipCodeName);
 
         const inputType = document.createElement("input");
         inputType.classList.add("input");
         inputType.classList.add("location-form__input");
+        inputType.placeholder = "By ZIP code...";
         zipCodeForm.append(inputType);
 
-        // Use this list to validate the zip code entered is one we have before trying to update the Google Map.
-        const zipCodeList = Config.ZipCodes().keys();
-        console.log(zipCodeList);
-
         inputType.oninput = (event) => {
-            let zipCodeEntered = inputType.value;
+            let zipCodeEntered = inputType.value
+            
             if(zipCodeEntered.length == 5){
-                console.log(zipCodeEntered);
                 Map.searchByZipCode();
             }          
-        }
+
 
         // const submitButton = document.createElement("button");
         // submitButton.innerHTML = "Submit";
@@ -76,8 +70,8 @@ module.exports = {
         // submitButton.classList.add("location-form__button");
         // zipCodeForm.append(submitButton);
         // submitButton.onclick = (event) => {
-        //     Map.searchByZipCode();
-        // }
+        //    
+        }
     },
 
     async localAreaDropdown() {
@@ -90,8 +84,9 @@ module.exports = {
         // Displays first option in the dropdown as empty.
         const option = document.createElement("option");
         option.value = "";
-        option.text = "";
+        option.text = "By city...";
         selectList.appendChild(option);
+        option.classList.add("default-city");
         document.querySelector(".by-town").append(selectList);
 
         // Populate dropdown with a list of cities we have recycle centers for.
@@ -107,14 +102,6 @@ module.exports = {
 
         // Update Google Map when different local area is selected.
         selectList.addEventListener('change', (event) => {
-            // Map.searchByTown();            
-            // const placeId = document.querySelector("#selectList").value;
-            // if (placeId == "") {
-            //     this.addresses(Config.EndPoints().get("get_all_centers"));
-            // }
-            // const endpoint = Config.EndPoints().get("get_centers_by_placeId") + placeId;
-            // this.addresses(endpoint);
-
             const city = document.querySelector("#selectList").value;
             if (city == "") {
                 this.addresses(Config.EndPoints().get("get_all_centers"));
@@ -150,25 +137,12 @@ module.exports = {
                     categoryContainer.append(div);
 
                     checkbox.addEventListener('change', function () {
-                        console.log("Checkbox with category id " + checkbox.value + " was clicked on.");
-
-                        // find which categories are selected
-                        // const checkboxes = document.getElementsByName("category-checkbox");
-                        // const selectedCategories = [];   
-
-                        console.log("inside event listener but before the checkboxes.forEach");
-                        // checkboxes.forEach(box => {
-
+                        
                         if (checkbox.checked) {
                             console.log("I clicked a checkbox; am inside the if for box.checked");
-                            // selectedCategories.push(checkbox.value);
-                            // (in the next line, 'city' is the city ID)
                             let city = document.querySelector("#selectList").value;
                             const url = "http://localhost:8080/api/centers/filter/" + city + "/" + checkbox.value;
                             const options = { method: "GET", headers: { "Accept": "application/json" } }
-
-
-
                             const addressContainer = document.querySelector(".addresses-container");
                             addressContainer.innerHTML = "";
                             addressContainer.innerHTML = "Recycle Locations:";
@@ -177,7 +151,6 @@ module.exports = {
                                 .then(res => res.json())
                                 .then(function (centers) {
                                     console.log(centers);
-                                    // Redisplay Address List -------------------------
                                     centers.forEach(center => {
                                         console.log("inside fetch for checking box");
                                         console.log(center.name);
@@ -196,15 +169,11 @@ module.exports = {
                                         addressContainer.append(div);
                                     })
                                     console.log("outside fetch for checking box");
-                                    // ------------------------------------------------
-
                                 });
 
                         } else if (!checkbox.checked) {
                             console.log("inside else if for unchecking box");
                             console.log("Fine day for some code~");
-                            // selectedCategories.push(checkbox.value);
-                            // (in the next line, 'city' is the city ID)
                             let city = document.querySelector("#selectList").value;
                             const url = "http://localhost:8080/api/centers/city/" + city;
                             const options = { method: "GET", headers: { "Accept": "application/json" } }
@@ -217,7 +186,7 @@ module.exports = {
                                 .then(res => res.json())
                                 .then(function (centers) {
                                     console.log(centers);
-                                    // Redisplay Address List -------------------------
+                                    
                                     centers.forEach(center => {
                                         console.log("inside fetch for unchecking box");
                                         console.log(center.name);
@@ -236,19 +205,14 @@ module.exports = {
                                         addressContainer.append(div);
                                     })
                                     console.log("outside fetch for unchecking box");
-                                    // ------------------------------------------------
+                                }); 
 
-                                }); // end fetch for unchecking a checkbox
-
-                        } // end of else if for unchecking a checkbox
+                        } 
 
                     })
                 }
             })
     },
-
-
-
 
     async addresses(endpoint) {
 
