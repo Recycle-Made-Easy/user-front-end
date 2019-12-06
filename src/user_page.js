@@ -26,7 +26,7 @@ module.exports = {
         flexWrapperLeft.append(locationSelectionContainer);
 
         const dropDownMenuTitle = document.createElement("h3");
-        dropDownMenuTitle.innerHTML = "Select A Location";
+        dropDownMenuTitle.innerHTML = "Select a Location";
         dropDownMenuTitle.classList.add("location-selection-header");
         locationSelectionContainer.append(dropDownMenuTitle);
 
@@ -39,7 +39,6 @@ module.exports = {
         locationWrapper.append(dropDownDiv);
 
         const byTown = document.createElement("p");
-        // byTown.innerHTML = "By city";
         byTown.classList.add("by-town");
         dropDownDiv.append(byTown);
 
