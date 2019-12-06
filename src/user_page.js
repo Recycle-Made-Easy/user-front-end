@@ -1,6 +1,5 @@
 const Map = require("./map");
 const Config = require("./config");
-// const Components = require("./components");
 
 module.exports = {
 
@@ -95,14 +94,6 @@ module.exports = {
 
         // Update Google Map when different local area is selected.
         selectList.addEventListener('change', (event) => {
-            // Map.searchByTown();            
-            // const placeId = document.querySelector("#selectList").value;
-            // if (placeId == "") {
-            //     this.addresses(Config.EndPoints().get("get_all_centers"));
-            // }
-            // const endpoint = Config.EndPoints().get("get_centers_by_placeId") + placeId;
-            // this.addresses(endpoint);
-
             const city = document.querySelector("#selectList").value;
             if (city == "") {
                 this.addresses(Config.EndPoints().get("get_all_centers"));
@@ -138,25 +129,12 @@ module.exports = {
                     categoryContainer.append(div);
 
                     checkbox.addEventListener('change', function () {
-                        console.log("Checkbox with category id " + checkbox.value + " was clicked on.");
-
-                        // find which categories are selected
-                        // const checkboxes = document.getElementsByName("category-checkbox");
-                        // const selectedCategories = [];   
-
-                        console.log("inside event listener but before the checkboxes.forEach");
-                        // checkboxes.forEach(box => {
-
+                        
                         if (checkbox.checked) {
                             console.log("I clicked a checkbox; am inside the if for box.checked");
-                            // selectedCategories.push(checkbox.value);
-                            // (in the next line, 'city' is the city ID)
                             let city = document.querySelector("#selectList").value;
                             const url = "http://localhost:8080/api/centers/filter/" + city + "/" + checkbox.value;
                             const options = { method: "GET", headers: { "Accept": "application/json" } }
-
-
-
                             const addressContainer = document.querySelector(".addresses-container");
                             addressContainer.innerHTML = "";
                             addressContainer.innerHTML = "Recycle Locations:";
@@ -165,7 +143,6 @@ module.exports = {
                                 .then(res => res.json())
                                 .then(function (centers) {
                                     console.log(centers);
-                                    // Redisplay Address List -------------------------
                                     centers.forEach(center => {
                                         console.log("inside fetch for checking box");
                                         console.log(center.name);
@@ -184,15 +161,11 @@ module.exports = {
                                         addressContainer.append(div);
                                     })
                                     console.log("outside fetch for checking box");
-                                    // ------------------------------------------------
-
                                 });
 
                         } else if (!checkbox.checked) {
                             console.log("inside else if for unchecking box");
                             console.log("Fine day for some code~");
-                            // selectedCategories.push(checkbox.value);
-                            // (in the next line, 'city' is the city ID)
                             let city = document.querySelector("#selectList").value;
                             const url = "http://localhost:8080/api/centers/city/" + city;
                             const options = { method: "GET", headers: { "Accept": "application/json" } }
@@ -205,7 +178,6 @@ module.exports = {
                                 .then(res => res.json())
                                 .then(function (centers) {
                                     console.log(centers);
-                                    // Redisplay Address List -------------------------
                                     centers.forEach(center => {
                                         console.log("inside fetch for unchecking box");
                                         console.log(center.name);
@@ -224,19 +196,13 @@ module.exports = {
                                         addressContainer.append(div);
                                     })
                                     console.log("outside fetch for unchecking box");
-                                    // ------------------------------------------------
-
-                                }); // end fetch for unchecking a checkbox
-
-                        } // end of else if for unchecking a checkbox
+                                }); 
+                        } 
 
                     })
                 }
             })
     },
-
-
-
 
     async addresses(endpoint) {
 
@@ -271,7 +237,6 @@ module.exports = {
     },
 
     googleMap() {
-        // Adds Google Map to the page.
         const googleMap = document.createElement("div");
         googleMap.classList.add("google-map");
         document.querySelector(".flex-wrapper-outer").append(googleMap);
