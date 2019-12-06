@@ -39,7 +39,7 @@ module.exports = {
         locationWrapper.append(dropDownDiv);
 
         const byTown = document.createElement("p");
-        byTown.innerHTML = "By city";
+        // byTown.innerHTML = "By city";
         byTown.classList.add("by-town");
         dropDownDiv.append(byTown);
 
@@ -48,13 +48,13 @@ module.exports = {
         locationWrapper.append(zipCodeForm);
 
         const zipCodeName = document.createElement("label");
-        zipCodeName.textContent = "By Zip code";
         zipCodeName.classList.add("name");
         zipCodeForm.append(zipCodeName);
 
         const inputType = document.createElement("input");
         inputType.classList.add("input");
         inputType.classList.add("location-form__input");
+        inputType.placeholder = "By ZIP code...";
         zipCodeForm.append(inputType);
 
         const submitButton = document.createElement("button");
@@ -77,8 +77,9 @@ module.exports = {
         // Displays first option in the dropdown as empty.
         const option = document.createElement("option");
         option.value = "";
-        option.text = "";
+        option.text = "By city...";
         selectList.appendChild(option);
+        option.classList.add("default-city");
         document.querySelector(".by-town").append(selectList);
 
         // Populate dropdown with a list of cities we have recycle centers for.
