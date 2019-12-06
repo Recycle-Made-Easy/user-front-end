@@ -57,14 +57,26 @@ module.exports = {
         inputType.classList.add("location-form__input");
         zipCodeForm.append(inputType);
 
-        const submitButton = document.createElement("button");
-        submitButton.innerHTML = "Submit";
-        submitButton.classList.add("submit");
-        submitButton.classList.add("location-form__button");
-        zipCodeForm.append(submitButton);
-        submitButton.onclick = (event) => {
-            Map.searchByZipCode();
+        // Use this list to validate the zip code entered is one we have before trying to update the Google Map.
+        const zipCodeList = Config.ZipCodes().keys();
+        console.log(zipCodeList);
+
+        inputType.oninput = (event) => {
+            let zipCodeEntered = inputType.value;
+            if(zipCodeEntered.length == 5){
+                console.log(zipCodeEntered);
+                Map.searchByZipCode();
+            }          
         }
+
+        // const submitButton = document.createElement("button");
+        // submitButton.innerHTML = "Submit";
+        // submitButton.classList.add("submit");
+        // submitButton.classList.add("location-form__button");
+        // zipCodeForm.append(submitButton);
+        // submitButton.onclick = (event) => {
+        //     Map.searchByZipCode();
+        // }
     },
 
     async localAreaDropdown() {
