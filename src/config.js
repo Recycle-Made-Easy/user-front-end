@@ -12,17 +12,17 @@ module.exports = {
     EndPoints() {
         const SERVER = this.SERVER();
         let endpoints = new Map();
-        endpoints.set("get_all_centers", "http://" + SERVER + "/api/centers/");
-        endpoints.set("get_centers_by_placeId", "http://" + SERVER + "/api/geo/placeId/"); // + placeId
-        endpoints.set("get_list_of_cities", "http://" + SERVER + "/api/centers/cities");  
-        endpoints.set("get_centers_by_city", "http://" + SERVER + "/api/centers/city/"); // + city name
-        endpoints.set("get_filtered_centers", "http://" + SERVER + "/api/centers/filter/"); // + city name and array of category ids, or just + array of category ids
+        endpoints.set("get_all_centers", SERVER + "/api/centers/");
+        endpoints.set("get_centers_by_placeId", SERVER + "/api/geo/placeId/"); // + placeId
+        endpoints.set("get_list_of_cities", SERVER + "/api/centers/cities");  
+        endpoints.set("get_centers_by_city", SERVER + "/api/centers/city/"); // + city name
+        endpoints.set("get_filtered_centers", SERVER + "/api/centers/filter/"); // + city name and array of category ids, or just + array of category ids
         return endpoints;
     },
     
     async LocalAreas() {
         let localAreas = [];
-        await fetch("http://" + this.SERVER() + "/api/geo/")
+        await fetch(this.SERVER() + "/api/geo/")
             .then(res => res.json())
             .then(function (data) {
                 localAreas = data;
