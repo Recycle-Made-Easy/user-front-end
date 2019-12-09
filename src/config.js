@@ -5,8 +5,8 @@ module.exports = {
     },
 
     SERVER() {
-        return "localhost:8080";
-        // return "bit.ly/rme-api";
+        // return "localhost:8080";
+        return "bit.ly/rme-api";
     },
 
     EndPoints() {
