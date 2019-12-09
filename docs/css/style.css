@@ -1,13 +1,36 @@
+@import url('https://fonts.googleapis.com/css?family=Sulphur+Point&display=swap');
+
+
 :root {
   --oscar-the-grouch: green;
   --some-sky-blue: rgb(144, 248, 255);
 }
 
-
-
 body {
   background-image: linear-gradient(white, var(--some-sky-blue));
+
   font-family: "Alata", sans-serif;
+  background-size: 200% 200%;
+  top:0px; 
+  font-family: 'Sulphur Point', sans-serif;
+  bottom: 0px;
+  height: 100%;
+  background-repeat: no-repeat;
+  position: center;
+  overflow-x: hidden;
+}
+
+.address-location {
+  background-image: linear-gradient(to right, white, rgb(196, 248, 196));
+  border: 5px solid green;
+  border-radius: 4px;
+  color: blue;
+  margin: 3px;
+  padding: 3px;
+}
+
+.address-location:hover {
+  color: green;
 }
 
 .by-town {
@@ -18,13 +41,60 @@ body {
   text-align: center;
 }
 
+.recycling-category-container {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    cursor: pointer;
+    position: relative;
+    vertical-align: middle;
+}
+
+.recycling-category-container > span {
+    color: rgb(255, 255, 255);
+    padding: 0.5rem 0.25rem;
+}
+
+.recycling-category-container > input {
+    height: 25px;
+    width: 25px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -o-appearance: none;
+    appearance: none;
+    border: 1px solid #34495E;
+    border-radius: 4px;
+    outline: none;
+    transition-duration: 0.3s;
+    background-color: #41B883;
+    cursor: pointer;
+}
+
+.recycling-category-container > input:checked {
+    border: 1px solid #41B883;
+    background-color: #34495E;
+}
+
+.recycling-category-container > input:checked + span::before {
+    content: '\2713';
+    display: block;
+    text-align: center;
+    color: #41B883;
+    position: relative;
+    left: 0.7rem;
+    top: 0.2rem;
+}
+
+.recycling-category-container > input:active {
+    border: 2px solid rgb(255, 255, 255);
+}
+
 .copyright {
   text-align: center;
 }
 
-.dropdown {
-  display: inline-block;
-  position: relative;
+.default-city{
+  color: red;
+  font-size: 14;
 }
 
 .dropdown-content {
@@ -43,25 +113,42 @@ body {
 }
 
 .flex-wrapper-left {
+  align-items: flex-start;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  align-items: flex-start;
-
-  margin: 35px;
+  margin-top: 0px; 
+  margin-bottom: 35px; 
+  margin-left: 35px; 
+  margin-right: 35px;
 }
 
 .flex-wrapper-outer {
+  /* This `align-items` is what allows the items (most importantly, the map!) 
+  to start at the top of the page. */
+  align-items: flex-start;
   display: flex;
   justify-content: center;
-  align-items: center;
 }
 
 .google-map {
+  border-radius: 4px;
+  border-style: solid;
+  border-width: 5px;
+  border-color: var(--oscar-the-grouch);
+  height: 100%;
+  width: 100%;
   overflow: hidden;
-  padding-bottom: 40%;
+  /* This is what affects if the map fits in the black box */
+  max-width: 550px;
+  max-height: 1000px;
   position: relative;
-  height: 0;
+}
+
+.google-map__iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
 }
 
 .header__container {
@@ -72,6 +159,8 @@ body {
 }
 
 .header__left-side {
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .header__menu {
@@ -85,30 +174,37 @@ body {
   justify-content: center;
 }
 
-.h1 {
+.header__title {
   color: var(--oscar-the-grouch);
   margin: 1rem;
   padding: 1rem;
 }
 
+.header__title:hover {
+  color: rgb(0, 212, 0);
+}
+
 .input {
   background-color: rgb(167, 221, 167);
+  margin-bottom: .5rem;
+  margin-left: 2rem;
 }
 
 label {
-  padding: 2px;
+  padding-top: 7px;
   text-align: left;
 }
 
 .location-selection-container {
   border-radius: 4px;
   border-style: solid;
-  border-width: 2px;
-  border-color: black;
+  border-width: 5px;
+  border-color: var(--oscar-the-grouch);
   padding: 5px;
 }
 
 .location-selection-header {
+  color: green;
   text-align: center;
 }
 
@@ -121,7 +217,6 @@ label {
   align-self: center;
   background-color: #18364b;
   color: #e2ecf2;
-  font-family: "Alata", sans-serif;
   font-size: 1.25rem;
   padding: 0.25rem;
   width: 100%;
@@ -134,11 +229,6 @@ label {
   transform: translateY(1px);
 }
 
-.location-form__button:focus {
-}
-
-.location-form__button:hover {
-}
 
 .location-form__fieldset {
   align-items: flex-start;
@@ -154,11 +244,29 @@ label {
   padding: 0.25rem;
 }
 
+.nav__button {
+  background-color: green;
+  color: white;
+  font-size: 1.15rem;
+  margin-left: 1.5rem;
+  margin-right: 1.5rem;
+  padding: 0.35rem;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+}
+
+.nav__button:hover {
+  background-color: rgb(0, 212, 0);
+  color: white;
+}
+
 .nav__container {
   align-items: center;
   display: flex;
-  flex-direction: row-reverse;
-  justify-content: center;
+  flex-direction: row;
+  justify-content: flex-end;
+  margin: 1rem;
+  padding: 1rem;
 }
 
 .nav__list {
@@ -169,15 +277,19 @@ label {
 }
 
 .nav__list-item {
+  color: var(--oscar-the-grouch);
+  font-size: 1.15rem;
   list-style: none;
   padding: 0.5rem;
   text-decoration: none;
 }
 
-.recycling-category-container {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: repeat(3, 1fr);
+.nav__list-item:hover {
+  color: rgb(0, 212, 0);
+}
+
+.selectList {
+  width: 150px;
 }
 
 .submit {
@@ -188,8 +300,4 @@ label {
 .submit:hover {
   background-color: rgb(0, 212, 0);
   color: white;
-}
-
-.wrapper {
-   
 }
