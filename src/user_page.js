@@ -61,16 +61,7 @@ module.exports = {
             
             if(zipCodeEntered.length == 5){
                 Map.searchByZipCode();
-            }          
-
-
-        // const submitButton = document.createElement("button");
-        // submitButton.innerHTML = "Submit";
-        // submitButton.classList.add("submit");
-        // submitButton.classList.add("location-form__button");
-        // zipCodeForm.append(submitButton);
-        // submitButton.onclick = (event) => {
-        //    
+            }            
         }
     },
 
@@ -118,7 +109,7 @@ module.exports = {
         categoryContainer.classList.add("recycling-category-container");
         document.querySelector(".flex-wrapper-left").append(categoryContainer);
 
-        fetch("http://" + Config.SERVER() + "/api/categories/")
+        fetch(Config.SERVER() + "/api/categories/")
             .then(res => res.json())
             .then(function (data) {
                 for (let index = 0; index < data.length; index++) {
@@ -141,7 +132,7 @@ module.exports = {
                         if (checkbox.checked) {
                             console.log("I clicked a checkbox; am inside the if for box.checked");
                             let city = document.querySelector("#selectList").value;
-                            const url = "http://" + Config.SERVER() + "/api/centers/filter/" + city + "/" + checkbox.value;
+                            const url = Config.SERVER() + "/api/centers/filter/" + city + "/" + checkbox.value;
                             const options = { method: "GET", headers: { "Accept": "application/json" } }
                             const addressContainer = document.querySelector(".addresses-container");
                             addressContainer.innerHTML = "";
@@ -176,7 +167,7 @@ module.exports = {
                             console.log("inside else if for unchecking box");
                             console.log("Fine day for some code~");
                             let city = document.querySelector("#selectList").value;
-                            const url = "http://" + Config.SERVER() + "/api/centers/city/" + city;
+                            const url = Config.SERVER() + "/api/centers/city/" + city;
                             const options = { method: "GET", headers: { "Accept": "application/json" } }
 
                             const addressContainer = document.querySelector(".addresses-container");
