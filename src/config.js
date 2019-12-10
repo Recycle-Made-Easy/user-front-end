@@ -6,7 +6,7 @@ module.exports = {
 
     SERVER() {
         // return "localhost:8080";
-        return "https://cbf82499.ngrok.io";
+        return "https://473073b1.ngrok.io";
     },
 
     EndPoints() {
@@ -41,6 +41,7 @@ module.exports = {
         zipCodeMap.set("43212", "ChIJOW2nsVCOOIgR0IzLWzB30l4");
         zipCodeMap.set("43215", "ChIJmRPPvRCGOIgRARpJZtkXzq0");
         zipCodeMap.set("43224", "ChIJj3ATYruLOIgRMmVSsRFsuQ0");
+        zipCodeMap.set("43204", "ChIJXx_BZR2QOIgRR04X197PhwE");
         return zipCodeMap;
     },
 
