@@ -58,10 +58,10 @@ module.exports = {
 
         inputType.oninput = (event) => {
             let zipCodeEntered = inputType.value
-            
-            if(zipCodeEntered.length == 5){
+
+            if (zipCodeEntered.length == 5) {
                 Map.searchByZipCode();
-            }            
+            }
         }
     },
 
@@ -96,18 +96,49 @@ module.exports = {
             const city = document.querySelector("#selectList").value;
             if (city == "") {
                 this.addresses(Config.EndPoints().get("get_all_centers"));
+                Map.displayMap(); // Reset map.
             }
             const endpoint = Config.EndPoints().get("get_centers_by_city") + city;
             this.addresses(endpoint);
+
+            // Display outline of city selected if we have placeId stored for that city.
+            try {
+                const cityPlaceId = Config.Cities().get(city);
+                if (!cityPlaceId == "") {
+                    Map.displayMapByPlaceId(cityPlaceId);
+                } else {
+                    console.error("We don't have the placeId for " + city + " saved.");
+                    Map.displayMap();
+                }
+            }
+            catch (error) {
+                console.error(error);
+                Map.displayMap();
+            }
+
+            // Clear selected categories.
+            const checkboxes = document.getElementsByName("category-checkbox");
+            checkboxes.forEach(checkbox => {
+                checkbox.checked = false;
+            })
+            // this.categories();
         }
         )
     },
 
     categories() {
 
-        const categoryContainer = document.createElement("section");
-        categoryContainer.classList.add("recycling-category-container");
-        document.querySelector(".flex-wrapper-left").append(categoryContainer);
+        if (document.body.contains(document.querySelector(".recycling-category-container"))) {
+            const categoryContainer = document.querySelector(".recycling-category-container");
+            categoryContainer.innerHTML = "";
+            categoryContainer.classList.add(".recycling-category-container");
+        } else {
+            const categoryContainer = document.createElement("section");
+            categoryContainer.classList.add("recycling-category-container");
+            document.querySelector(".flex-wrapper-left").append(categoryContainer);
+        }
+
+        const categoryContainer = document.querySelector(".recycling-category-container");
 
         fetch(Config.SERVER() + "/api/categories/")
             .then(res => res.json())
@@ -128,7 +159,7 @@ module.exports = {
                     categoryContainer.append(div);
 
                     checkbox.addEventListener('change', function () {
-                        
+
                         if (checkbox.checked) {
                             console.log("I clicked a checkbox; am inside the if for box.checked");
                             let city = document.querySelector("#selectList").value;
@@ -178,7 +209,7 @@ module.exports = {
                                 .then(res => res.json())
                                 .then(function (centers) {
                                     console.log(centers);
-                                    
+
                                     centers.forEach(center => {
                                         console.log("inside fetch for unchecking box");
                                         console.log(center.name);
@@ -197,9 +228,9 @@ module.exports = {
                                         addressContainer.append(div);
                                     })
                                     console.log("outside fetch for unchecking box");
-                                }); 
+                                });
 
-                        } 
+                        }
 
                     })
                 }
