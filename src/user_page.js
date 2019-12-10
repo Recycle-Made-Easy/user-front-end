@@ -60,10 +60,9 @@ module.exports = {
             let zipCodeEntered = inputType.value
 
             if (zipCodeEntered.length == 5) {
-                // Map.searchByZipCode();
 
-                // Display outline of zipcode selected if we have placeId stored for that zipcode.
                 try {
+                    // Display outline of zipcode selected if we have placeId stored for that zipcode.
                     const zipPlaceId = Config.ZipCodes().get(zipCodeEntered);
                     if (!zipPlaceId == "") {
                         Map.displayMapByPlaceId(zipPlaceId);
@@ -71,6 +70,12 @@ module.exports = {
                         console.error("We don't have the placeId for " + zipCodeEntered + " saved.");
                         Map.displayMap();
                     }
+
+                    // Filter addresses listed based on entered zip code.
+                    const endpoint = Config.EndPoints().get("get_centers_by_zip") + zipCodeEntered;
+                    console.log(endpoint);
+                    this.addresses(endpoint);
+
                 }
                 catch (error) {
                     console.error(error);
@@ -176,7 +181,6 @@ module.exports = {
                     checkbox.addEventListener('change', function () {
 
                         if (checkbox.checked) {
-                            console.log("I clicked a checkbox; am inside the if for box.checked");
                             let city = document.querySelector("#selectList").value;
                             const url = Config.SERVER() + "/api/centers/filter/" + city + "/" + checkbox.value;
                             const options = { method: "GET", headers: { "Accept": "application/json" } }
@@ -188,11 +192,7 @@ module.exports = {
                             fetch(url, options)
                                 .then(res => res.json())
                                 .then(function (centers) {
-                                    console.log(centers);
                                     centers.forEach(center => {
-                                        console.log("inside fetch for checking box");
-                                        console.log(center.name);
-                                        console.log(center.placeId);
                                         const div = document.createElement("div")
                                         div.classList.add("address-location");
                                         const link = document.createElement('div')
@@ -206,12 +206,9 @@ module.exports = {
                                         div.append(link);
                                         addressContainer.append(div);
                                     })
-                                    console.log("outside fetch for checking box");
                                 });
 
                         } else if (!checkbox.checked) {
-                            console.log("inside else if for unchecking box");
-                            console.log("Fine day for some code~");
                             let city = document.querySelector("#selectList").value;
                             const url = Config.SERVER() + "/api/centers/city/" + city;
                             const options = { method: "GET", headers: { "Accept": "application/json" } }
@@ -223,10 +220,7 @@ module.exports = {
                             fetch(url, options)
                                 .then(res => res.json())
                                 .then(function (centers) {
-                                    console.log(centers);
-
                                     centers.forEach(center => {
-                                        console.log("inside fetch for unchecking box");
                                         console.log(center.name);
                                         console.log(center.placeId);
                                         const div = document.createElement("div")
@@ -242,7 +236,6 @@ module.exports = {
                                         div.append(link);
                                         addressContainer.append(div);
                                     })
-                                    console.log("outside fetch for unchecking box");
                                 });
 
                         }
