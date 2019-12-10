@@ -60,7 +60,23 @@ module.exports = {
             let zipCodeEntered = inputType.value
 
             if (zipCodeEntered.length == 5) {
-                Map.searchByZipCode();
+                // Map.searchByZipCode();
+
+                // Display outline of zipcode selected if we have placeId stored for that zipcode.
+                try {
+                    const zipPlaceId = Config.ZipCodes().get(zipCodeEntered);
+                    if (!zipPlaceId == "") {
+                        Map.displayMapByPlaceId(zipPlaceId);
+                    } else {
+                        console.error("We don't have the placeId for " + zipCodeEntered + " saved.");
+                        Map.displayMap();
+                    }
+                }
+                catch (error) {
+                    console.error(error);
+                    Map.displayMap();
+                }
+
             }
         }
     },
@@ -121,7 +137,6 @@ module.exports = {
             checkboxes.forEach(checkbox => {
                 checkbox.checked = false;
             })
-            // this.categories();
         }
         )
     },
