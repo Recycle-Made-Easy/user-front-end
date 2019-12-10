@@ -72,9 +72,19 @@ module.exports = {
                     }
 
                     // Filter addresses listed based on entered zip code.
-                    const endpoint = Config.EndPoints().get("get_centers_by_zip") + zipCodeEntered;
-                    console.log(endpoint);
+                    let endpoint = Config.EndPoints().get("get_centers_by_zip") + zipCodeEntered;
+
+                    // console.log(endpoint);
                     this.addresses(endpoint);
+
+                    // Clear city dropdown.
+                    document.getElementById("selectList").selectedIndex = 0;
+
+                    // Clear selected categories because filter with zip & category doesn't work yet.
+                    const checkboxes = document.getElementsByName("category-checkbox");
+                    checkboxes.forEach(checkbox => {
+                        checkbox.checked = false;
+                    })
 
                 }
                 catch (error) {
@@ -142,6 +152,12 @@ module.exports = {
             checkboxes.forEach(checkbox => {
                 checkbox.checked = false;
             })
+
+            // Clear zip code field.
+            const zipCodeInput = document.querySelector(".location-form__input");
+            zipCodeInput.value = "";
+            zipCodeInput.textContent = "";
+
         }
         )
     },
