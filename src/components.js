@@ -21,18 +21,13 @@ module.exports = {
 
         const headerTitle = document.createElement("h1");
         headerTitle.innerHTML = "Recycle Made Easy";
-        headerTitle.classList.add("header__title");
-        headerTitle.href = "javascript:void(0);";
+        headerTitle.classList.add("header__title");        
         headerLeftSide.append(headerTitle);
 
         const contentBody = document.createElement("div");
         contentBody.classList.add("content-wrapper");
         wrapper.append(contentBody);
-
-        headerTitle.onclick = () => {
-            document.querySelector(".content-wrapper").innerHTML = "";
-            UserPage.displayUserPage();
-        }
+        
     },
 
     async addresses(endpoint) {
